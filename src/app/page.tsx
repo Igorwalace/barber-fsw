@@ -10,6 +10,7 @@ const Page = () => {
     <div className='' >
       <Header />
       <Banner_Main />
+      <div className='block lg:hidden px-5 pt-5' ><Search_Home /></div>
     </div>
   )
 }

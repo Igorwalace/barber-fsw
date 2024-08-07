@@ -12,7 +12,7 @@ import { righteous } from '../_services/fonts/fonts'
 
 const Header = () => {
     return (
-        <div className='px-10 py-5' >
+        <div className='lg:px-10 px-5 py-5 border-b-2 border-separate' >
             <nav className='flex justify-between items-center' >
                 <div>
                     <button className={`${righteous.className} text-primary text-3xl font-bold`} >IG<span className='text-white' >Barber</span></button>

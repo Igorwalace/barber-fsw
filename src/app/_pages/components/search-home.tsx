@@ -8,9 +8,9 @@ import { CiSearch } from 'react-icons/ci'
 const Search_Home = () => {
     return (
         <>
-            <h1 className='text-2xl font-normal' >Olá. Faça seu login!</h1>
-            <h1 className='text-sm font-light'>Sexta, 2 de fevereiro</h1>
-            <div className='flex mt-10 gap-1' >
+            <h1 className='lg:text-2xl text-xl font-normal' >Olá. Faça seu login!</h1>
+            <h1 className='lg:text-base text-sm font-light'>Sexta, 2 de fevereiro</h1>
+            <div className='flex lg:mt-10 mt-5 gap-1' >
                 <Input type="email" placeholder="Buscar Barbearias" />
                 <Button variant="outline" size="icon" className='bg-[#8162FF] px-2'>
                     <CiSearch size={20} className='font-extrabold' />
