@@ -3,8 +3,10 @@ import React from 'react'
 //shadcn
 
 //react-icons
-import Re_Banner from './recomendados-banner'
-import Search_Home from './components/search-home'
+import Re_Banner from './_recomendados-banner'
+
+//pages
+import Search_Home from './components/_search-home'
 
 const Banner_Main = () => {
     return (

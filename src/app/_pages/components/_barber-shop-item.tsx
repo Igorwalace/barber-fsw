@@ -12,7 +12,7 @@ interface BarbershopItemProps {
 const BarbershopItem = ({ barbershop }: BarbershopItemProps) => {
     return (
         <>
-            <main className='w-56 min-h-52 bg-secondary rounded-2xl' >
+            <main className='min-w-[165px] lg:w-56 min-h-60 bg-card rounded-2xl' >
                 <div className='relative h-[159px] w-full' >
                     <Image
                         src={barbershop.imageUrl}
@@ -22,9 +22,9 @@ const BarbershopItem = ({ barbershop }: BarbershopItemProps) => {
                     />
                 </div>
                 <div className="p-3 flex flex-col gap-[8px]">
-                    <h1 className='text-sm font-bold' >{barbershop.name}</h1>
-                    <h1 className='text-xs text-[#838896]' >{barbershop.address}</h1>
-                    <Button variant='outline'>Reservar</Button>
+                    <h1 className='text-sm font-bold whitespace-nowrap' >{barbershop.name}</h1>
+                    <h1 className='text-xs text-[#838896] whitespace-nowrap' >{barbershop.address}</h1>
+                    <Button variant='secondary'>Reservar</Button>
                 </div>
             </main>
         </>

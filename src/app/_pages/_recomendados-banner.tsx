@@ -4,7 +4,7 @@ import React from 'react'
 import { prisma } from '../_services/prisma/_prisma'
 
 //pages
-import BarbershopItem from './components/barber-shop-item'
+import BarbershopItem from './components/_barber-shop-item'
 
 const Re_Banner = async () => {
 
