@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const poppins = Poppins({ subsets: ["latin"], weight: '400' });
+//fonts
+import { poppins } from "./_services/fonts/fonts";
 
 export const metadata: Metadata = {
   title: "Barber FSW",
