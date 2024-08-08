@@ -12,8 +12,8 @@ interface BarbershopItemProps {
 const BarbershopItem = ({ barbershop }: BarbershopItemProps) => {
     return (
         <>
-            <main className='min-w-[165px] lg:w-56 min-h-60 bg-card rounded-2xl' >
-                <div className='relative h-[159px] w-full' >
+            <main className='w-[165px] lg:w-56 min-h-60 bg-card rounded-2xl' >
+                <div className='relative lg:h-[159px] h-[120px] w-full' >
                     <Image
                         src={barbershop.imageUrl}
                         fill
