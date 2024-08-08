@@ -16,7 +16,7 @@ const Re_Banner = async () => {
                 <div>
                     <h1 className='uppercase text-sm' >Recomendados</h1>
                 </div>
-                <div className='flex gap-3 mt-5' >
+                <div className='flex gap-3 mt-5 overflow-x-auto scrollbar-none' >
                     {
                         barbershop.slice(0, 3).map((barber) => (
                             <BarbershopItem key={barber.id} barbershop={barber} />
