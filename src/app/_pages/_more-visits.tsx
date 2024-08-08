@@ -7,14 +7,14 @@ import { prisma } from '../_services/prisma/_prisma'
 import BarbershopItem from './components/_barber-shop-item'
 import Title from '../_components-g/title'
 
-const Popular = async () => {
+const More_Visits = async () => {
 
     const barbershop = await prisma.barbershop.findMany()
 
     return (
         <>
             <main className='py-5 lg:px-10 px-5' >
-                <Title title={`Populares`} />
+                <Title title={`Mais Visitados`} />
                 <div className='flex gap-3 justify-between items-center pt-3 overflow-x-scroll scrollbar-none' >
                     {
                         barbershop.slice(0, 5).map((barber) => (
@@ -27,4 +27,4 @@ const Popular = async () => {
     )
 }
 
-export default Popular
+export default More_Visits

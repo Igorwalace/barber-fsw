@@ -18,7 +18,7 @@ const Re_Banner = async () => {
                 </div>
                 <div className='flex gap-3 mt-5' >
                     {
-                        barbershop.slice(0, 2).map((barber) => (
+                        barbershop.slice(0, 3).map((barber) => (
                             <BarbershopItem key={barber.id} barbershop={barber} />
                         ))
                     }

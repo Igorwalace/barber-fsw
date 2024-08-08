@@ -12,7 +12,7 @@ interface BarbershopItemProps {
 const BarbershopItem = ({ barbershop }: BarbershopItemProps) => {
     return (
         <>
-            <main className='w-[165px] lg:w-56 min-h-60 bg-card rounded-2xl' >
+            <main className='w-[165px] lg:w-56 min-h-60 bg-card rounded-2xl border-2 border-[#26272B]' >
                 <div className='relative lg:h-[159px] h-[120px] w-full' >
                     <Image
                         src={barbershop.imageUrl}
