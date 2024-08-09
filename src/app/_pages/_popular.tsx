@@ -6,6 +6,7 @@ import { prisma } from '../_services/prisma/_prisma'
 //pages
 import BarbershopItem from './components/_barber-shop-item'
 import Title from '../_components-g/title'
+import Button_Arrow from '../_components-g/butto-arrow'
 
 const Popular = async () => {
 
@@ -13,7 +14,7 @@ const Popular = async () => {
 
     return (
         <>
-            <main className='py-5 lg:px-10 px-5' >
+            <main className='py-5 lg:px-10 px-5 relative' >
                 <Title title={`Populares`} />
                 <div className='flex gap-3 justify-between items-center pt-3 overflow-x-scroll scrollbar-none' >
                     {
@@ -21,7 +22,8 @@ const Popular = async () => {
                             <BarbershopItem key={barber.id} barbershop={barber} />
                         ))
                     }
-                </div>
+                    <Button_Arrow />
+                    </div>
             </main>
         </>
     )

@@ -5,6 +5,7 @@ import { prisma } from '../_services/prisma/_prisma'
 
 //pages
 import BarbershopItem from './components/_barber-shop-item'
+import Button_Arrow from '../_components-g/butto-arrow'
 
 const Re_Banner = async () => {
 
@@ -12,7 +13,7 @@ const Re_Banner = async () => {
 
     return (
         <>
-            <main className='lg:px-0 lg:py-0 pt-5 px-5' >
+            <main className='lg:px-0 lg:py-0 pt-5 px-5 relative' >
                 <div>
                     <h1 className='uppercase text-sm' >Recomendados</h1>
                 </div>
