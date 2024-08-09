@@ -35,7 +35,6 @@ const Below_Img = ({ barbersingle }: BarberSingleProps) => {
                     <span className='text-xs' >800 avaliações</span>
                 </div>
 
-
             </div>
         </>
     )

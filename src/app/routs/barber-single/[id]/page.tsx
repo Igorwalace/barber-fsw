@@ -14,6 +14,7 @@ import Logo from '@/app/_components-g/logo-icon'
 import { Separator } from '@/app/_services/components/ui/separator'
 import About from './about'
 import Below_Img from './below-img'
+import { Button } from '@/app/_services/components/ui/button'
 
 interface BaberSingleProps {
     params: {
@@ -51,6 +52,37 @@ const Page = async ({ params }: BaberSingleProps) => {
                         />
                     </div>
                     <Below_Img barbersingle={barbersingle} />
+
+                    <div className='flex flex-col gap-2' >
+                        <div>
+                            <h1 className='text-sm' >Serviços</h1>
+                        </div>
+                        <div className='lg:grid lg:grid-cols-2 gap-2' >
+                            {
+                                barbersingle.services.map((service)=>(
+                                    <div key={service.id} className='bg-card p-3 flex gap-3 rounded-lg' >
+                                        <div className='relative w-28 h-28' >
+                                            <Image
+                                                fill
+                                                className='rounded-lg'
+                                                quality={100}
+                                                alt={service.name}
+                                                src={service.imageUrl}
+                                            />
+                                        </div>
+                                        <div className='flex flex-col justify-between' >
+                                            <h1 className='text-sm font-bold' >{service.name}</h1>
+                                            <h1 className='text-sm text-[#838896] max-w-56' >{service.description}</h1>
+                                            <div className='flex justify-between items-center' >
+                                                <span className='text-primary text-sm font-extrabold' >R$ {Number(service.price)}</span>
+                                                <Button variant='secondary' >Reservar</Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
 
                 </div>
                 <div className='w-[386px] lg:flex hidden bg-card p-3 flex-col gap-3 rounded-lg' >
