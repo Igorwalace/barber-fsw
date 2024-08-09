@@ -53,18 +53,20 @@ const Page = async ({ params }: BaberSingleProps) => {
                     </div>
                     <Below_Img barbersingle={barbersingle} />
 
-                    <div className='flex flex-col gap-2' >
+                    <Separator className='h-[3px] mb-5' />
+
+                    <div className='flex flex-col gap-2 lg:px-0 px-5' >
                         <div>
                             <h1 className='text-sm' >Serviços</h1>
                         </div>
-                        <div className='lg:grid lg:grid-cols-2 gap-2' >
+                        <div className='grid lg:grid-cols-2 gap-2' >
                             {
                                 barbersingle.services.map((service)=>(
                                     <div key={service.id} className='bg-card p-3 flex gap-3 rounded-lg' >
                                         <div className='relative w-28 h-28' >
                                             <Image
                                                 fill
-                                                className='rounded-lg'
+                                                className='rounded-lg object-cover'
                                                 quality={100}
                                                 alt={service.name}
                                                 src={service.imageUrl}
@@ -72,7 +74,7 @@ const Page = async ({ params }: BaberSingleProps) => {
                                         </div>
                                         <div className='flex flex-col justify-between' >
                                             <h1 className='text-sm font-bold' >{service.name}</h1>
-                                            <h1 className='text-sm text-[#838896] max-w-56' >{service.description}</h1>
+                                            <h1 className='text-sm text-[#838896] lg:max-w-56' >{service.description}</h1>
                                             <div className='flex justify-between items-center' >
                                                 <span className='text-primary text-sm font-extrabold' >R$ {Number(service.price)}</span>
                                                 <Button variant='secondary' >Reservar</Button>
