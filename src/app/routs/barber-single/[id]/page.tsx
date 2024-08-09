@@ -7,13 +7,15 @@ import { prisma } from '@/app/_services/prisma/_prisma'
 
 //pages
 import Header from '@/app/_pages/_header'
+import About from './about'
 import Phone_Item from './phone-item'
 import Logo from '@/app/_components-g/logo-icon'
+import Arrow_Back from './arrow-back'
+import Below_Img from './below-img'
+import Menu_Barber from './menu-barber-single'
 
 //shadcn
 import { Separator } from '@/app/_services/components/ui/separator'
-import About from './about'
-import Below_Img from './below-img'
 import { Button } from '@/app/_services/components/ui/button'
 
 interface BaberSingleProps {
@@ -50,6 +52,12 @@ const Page = async ({ params }: BaberSingleProps) => {
                             src={barbersingle?.imageUrl}
                             alt={barbersingle?.description}
                         />
+                        <div className='absolute top-3 left-3' >
+                            <Arrow_Back />
+                        </div>
+                        <div className='absolute top-3 right-3' >
+                            <Menu_Barber />
+                        </div>
                     </div>
                     <Below_Img barbersingle={barbersingle} />
 
@@ -61,7 +69,7 @@ const Page = async ({ params }: BaberSingleProps) => {
                         </div>
                         <div className='grid lg:grid-cols-2 gap-2' >
                             {
-                                barbersingle.services.map((service)=>(
+                                barbersingle.services.map((service) => (
                                     <div key={service.id} className='bg-card p-3 flex gap-3 rounded-lg' >
                                         <div className='relative w-28 h-28' >
                                             <Image
