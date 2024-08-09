@@ -30,11 +30,11 @@ const Categorys = () => {
 
     return (
         <>
-            <div className='flex gap-3' >
+            <div className='flex gap-3 w-full overflow-x-auto scrollbar-none' >
                 {
                     categorys.map((categorys: InterfaceCategory) => (
                         <div key={categorys.name}>
-                            <Button className='rounded-3xl' variant='secondary' ><span className='pr-2' >{categorys.icon}</span>{categorys.name}</Button>
+                            <Button className='rounded-3xl text-sm' variant='secondary' ><span className='pr-2' >{categorys.icon}</span>{categorys.name}</Button>
                         </div>
                     ))
                 }

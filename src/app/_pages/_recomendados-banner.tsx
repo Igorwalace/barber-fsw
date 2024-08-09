@@ -5,7 +5,6 @@ import { prisma } from '../_services/prisma/_prisma'
 
 //pages
 import BarbershopItem from './components/_barber-shop-item'
-import Button_Arrow from '../_components-g/butto-arrow'
 
 const Re_Banner = async () => {
 
