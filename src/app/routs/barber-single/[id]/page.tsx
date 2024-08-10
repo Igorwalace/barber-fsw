@@ -75,7 +75,6 @@ const Page = async ({ params }: BaberSingleProps) => {
                                             <Image
                                                 fill
                                                 className='rounded-lg object-cover'
-                                                quality={100}
                                                 alt={service.name}
                                                 src={service.imageUrl}
                                             />
