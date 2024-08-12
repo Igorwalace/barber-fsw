@@ -9,8 +9,8 @@ const Footer = () => {
         <div className='lg:px-10 px-5 py-5 bg-secondary text-sm font-bold' >
             © 2024 Copyright
             {` `}
-            <Link href='https://meu-website-igor.vercel.app/' target='_blank' className={`${righteous.className} underline`} >
-                <span className='text-primary' >IG</span>Barber FSW
+            <Link href='https://meu-website-igor.vercel.app/' target='_blank' className={`${righteous.className} underline text-xl`} >
+                <span className='text-primary' >IG</span>Barber
             </Link>
         </div>
     )

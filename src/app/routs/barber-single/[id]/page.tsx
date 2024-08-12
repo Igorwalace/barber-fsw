@@ -1,3 +1,5 @@
+
+//react-next
 import Image from 'next/image'
 import React from 'react'
 import { notFound } from 'next/navigation'
@@ -7,12 +9,14 @@ import { prisma } from '@/app/_services/prisma/_prisma'
 
 //pages
 import Header from '@/app/_pages/_header'
-import About from './about'
-import Phone_Item from './phone-item'
+import About from './_components/about'
+import Phone_Item from './_components/phone-item'
 import Logo from '@/app/_components-g/logo-icon'
-import Arrow_Back from './arrow-back'
-import Below_Img from './below-img'
-import Menu_Barber from './menu-barber-single'
+import Arrow_Back from './_components/arrow-back'
+import Below_Img from './_components/below-img'
+import Menu_Barber from './_components/menu-barber-single'
+import Footer from '@/app/_pages/_footer'
+import Button_Reservar from './_components/button-reservar'
 
 //shadcn
 import { Separator } from '@/app/_services/components/ui/separator'
@@ -52,18 +56,18 @@ const Page = async ({ params }: BaberSingleProps) => {
                             src={barbersingle?.imageUrl}
                             alt={barbersingle?.description}
                         />
-                        <div className='absolute top-3 left-3' >
+                        <div className='absolute top-3 left-3 lg:hidden' >
                             <Arrow_Back />
                         </div>
-                        <div className='absolute top-3 right-3' >
+                        <div className='absolute top-3 right-3 lg:hidden' >
                             <Menu_Barber />
                         </div>
                     </div>
                     <Below_Img barbersingle={barbersingle} />
 
-                    <Separator className='h-[3px] mb-5' />
+                    <Separator className='h-[3px]' />
 
-                    <div className='flex flex-col gap-2 lg:px-0 px-5' >
+                    <div className='flex flex-col gap-2 lg:px-0 px-5 py-5' >
                         <div>
                             <h1 className='text-sm' >Serviços</h1>
                         </div>
@@ -84,7 +88,7 @@ const Page = async ({ params }: BaberSingleProps) => {
                                             <h1 className='text-sm text-[#838896] lg:max-w-56' >{service.description}</h1>
                                             <div className='flex justify-between items-center' >
                                                 <span className='text-primary text-sm font-extrabold' >R$ {Number(service.price)}</span>
-                                                <Button variant='secondary' >Reservar</Button>
+                                                <Button_Reservar barberservice={service} />
                                             </div>
                                         </div>
                                     </div>
@@ -94,7 +98,7 @@ const Page = async ({ params }: BaberSingleProps) => {
                     </div>
 
                 </div>
-                <div className='w-[386px] lg:flex hidden bg-card p-3 flex-col gap-3 rounded-lg' >
+                <div className='w-[386px] max-h-[700px] lg:block hidden bg-card p-3 space-y-3 rounded-lg' >
 
                     <div className='relative w-full h-[180px]' >
                         <Image
@@ -133,13 +137,14 @@ const Page = async ({ params }: BaberSingleProps) => {
 
                     <Separator className='h-[2px]' />
 
-                    <div className='flex gap-2 items-center justify-center py-5' >
+                    <div className='flex gap-2 items-center justify-center' >
                         <h1>Em parceria com</h1>
                         <Logo />
                     </div>
 
                 </div>
             </div>
+            <Footer />
         </>
     )
 }
