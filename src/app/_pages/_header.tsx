@@ -28,7 +28,7 @@ const Header = async () => {
                     {
                         session?.user
                             ?
-                            <Perfil_Logado />
+                            <Perfil_Logado session={session} />
                             :
                             <Perfil_Login />
                     }
