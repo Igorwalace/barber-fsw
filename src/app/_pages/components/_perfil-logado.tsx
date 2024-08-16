@@ -18,22 +18,29 @@ import { signOut } from "next-auth/react";
 
 const Perfil_Logado = ({ session }: any) => {
 
-    const [openDialogLogado, useOpenDialogLogado] = useState(false)
+    const [openDialogLogado, setOpenDialogLogado] = useState(false)
+    const [loadingSignout, setLoadingSignout] = useState(false)
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const handleLogado = () => useOpenDialogLogado(true)
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const handleSignOut = () => useOpenDialogLogado(false)
+    const handleLoadingSignOut = async () => {
+        setLoadingSignout(true)
+        try {
+            await signOut()
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoadingSignout(false)
+        }
+    }
 
     return (
         <>
-            <Button variant='ghost' onClick={handleLogado} className='flex gap-2 items-center' >
+            <Button variant='ghost' onClick={() => setOpenDialogLogado(true)} className='flex gap-2 items-center' >
                 <Avatar>
                     <AvatarImage src={session?.user?.image ?? ''} />
                 </Avatar>
                 <h1 className='text-base font-bold' >{session?.user?.name}</h1>
             </Button>
-            <Dialog open={openDialogLogado} onOpenChange={useOpenDialogLogado} >
+            <Dialog open={openDialogLogado} onOpenChange={setOpenDialogLogado} >
                 <DialogContent>
                     <DialogHeader>
                         <DialogTitle>Sair</DialogTitle>
@@ -41,8 +48,16 @@ const Perfil_Logado = ({ session }: any) => {
                             Deseja sair da plataforma?
                         </DialogDescription>
                         <DialogDescription className='pt-2 w-full flex gap-2' >
-                            <Button variant='secondary' className='gap-1 w-full' onClick={handleSignOut} >Voltar</Button>
-                            <Button variant='destructive' className='gap-1 w-full' onClick={() => signOut()} >Sair</Button>
+                            <Button variant='secondary' className='gap-1 w-2/4' disabled={loadingSignout} onClick={() => setOpenDialogLogado(false)} >Voltar</Button>
+                            <Button variant='destructive' className={`gap-1 w-2/4`} disabled={loadingSignout} onClick={handleLoadingSignOut} >
+                                {
+                                    loadingSignout
+                                        ?
+                                        <span className={`${loadingSignout && 'loader'}`} ></span>
+                                        :
+                                        'Sair'
+                                }
+                            </Button>
                         </DialogDescription>
                     </DialogHeader>
                 </DialogContent>
