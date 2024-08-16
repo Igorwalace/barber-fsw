@@ -25,7 +25,7 @@ const Search_Home = async () => {
                     <h1 className='lg:text-2xl text-xl font-normal' >Olá. Faça seu login!</h1>
 
             }
-            <h1 className='lg:text-base text-sm font-light'>{dayCurrent}, {date.getDate()} de <span className='capitalize' >{date.toLocaleString('default', { month: 'long' })}.</span></h1>
+            <h1 className='lg:text-base text-sm font-light'>{dayCurrent}, {date.getDate()} de <span className='capitalize' >{date.toLocaleString('pt-BR', { month: 'long' })}.</span></h1>
             <div className='flex lg:mt-10 mt-5 gap-1' >
                 <Input type="email" placeholder="Buscar Barbearias" />
                 <Button variant="outline" size="icon" className='bg-[#8162FF] px-2'>
