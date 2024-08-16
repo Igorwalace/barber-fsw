@@ -21,8 +21,7 @@ import { useState } from "react";
 //pages
 import Dialog_Login from "./_dialog-login";
 
-
-const Menu_Mobile = () => {
+const Menu_Mobile = ({ session }: any) => {
 
     const [openSheetMenu, setOpenSheetMenu] = useState(false)
     const [openDialogLogin, setOpenDialogLogin] = useState(false)
@@ -35,11 +34,21 @@ const Menu_Mobile = () => {
                     <SheetHeader>
                         <SheetTitle className='flex justify-start' >Menu</SheetTitle>
                         <SheetDescription>
-                            <SheetClose className='flex justify-between py-3 items-center' >
-                                <span className='text-white text-lg' >Olá, faça seu login</span>
-                                <Button onClick={() => setOpenDialogLogin(true)} className='bg-primary text-white p-2 rounded-lg' >
-                                    <IoExitOutline size={20} />
-                                </Button>
+                            <SheetClose className='w-full' >
+                                {
+                                    session
+                                        ?
+                                        <>
+                                            <span className='text-white text-lg' >Olá, {session?.user?.name}</span>
+                                        </>
+                                        :
+                                        <div className='flex justify-between py-3 items-center'>
+                                            <span className='text-white text-lg' >Olá, faça seu login</span>
+                                            <Button onClick={() => setOpenDialogLogin(true)} className='bg-primary text-white p-2 rounded-lg' >
+                                                <IoExitOutline size={20} />
+                                            </Button>
+                                        </div>
+                                }
                             </SheetClose>
                             {/* <Separator className='my-5' /> */}
                             <div>

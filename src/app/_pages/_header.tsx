@@ -35,7 +35,7 @@ const Header = async () => {
                     }
                 </div>
                 <div className='lg:hidden' >
-                    <Menu_Mobile />
+                    <Menu_Mobile session={session} />
                 </div>
             </nav>
         </div>
