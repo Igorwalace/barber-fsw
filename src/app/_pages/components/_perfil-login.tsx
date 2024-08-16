@@ -24,7 +24,7 @@ const Perfil_Login = () => {
         <>
             <Button onClick={() => setOpenDialogLogin(true)} variant="secondary" className='bg-primary text-sm py-2 px-3 flex gap-1' ><span><FaRegUserCircle /></span>Perfil</Button>
             <Dialog open={openDialogLogin} onOpenChange={setOpenDialogLogin} >
-                <DialogContent>
+                <DialogContent className='w-[90%] rounded-lg' >
                     <DialogHeader>
                         <DialogTitle>Faça login na plataforma</DialogTitle>
                         <DialogDescription>

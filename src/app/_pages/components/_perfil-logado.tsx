@@ -41,7 +41,7 @@ const Perfil_Logado = ({ session }: any) => {
                 <h1 className='text-base font-bold' >{session?.user?.name}</h1>
             </Button>
             <Dialog open={openDialogLogado} onOpenChange={setOpenDialogLogado} >
-                <DialogContent>
+                <DialogContent className='w-[90%] rounded-lg' >
                     <DialogHeader>
                         <DialogTitle>Sair</DialogTitle>
                         <DialogDescription>
