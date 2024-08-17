@@ -22,7 +22,7 @@ const Search_Home = async () => {
                     ?
                     <h1 className='lg:text-2xl text-xl font-normal' >Olá, {session?.user?.name}!</h1>
                     :
-                    <h1 className='lg:text-2xl text-xl font-normal' >Olá. Faça seu login!</h1>
+                    <h1 className='lg:text-2xl text-xl font-normal' >Olá, faça seu login!</h1>
 
             }
             <h1 className='lg:text-base text-sm font-light'>{dayCurrent}, {date.getDate()} de <span className='capitalize' >{date.toLocaleString('pt-BR', { month: 'long' })}.</span></h1>

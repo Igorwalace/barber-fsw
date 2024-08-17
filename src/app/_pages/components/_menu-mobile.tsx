@@ -19,30 +19,25 @@ import { Separator } from "@/app/_services/components/ui/separator";
 import { Avatar, AvatarImage } from "@/app/_services/components/ui/avatar";
 
 //react-next
+import Link from "next/link";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
 
 //pages
-import Dialog_Login from "./_dialog-login";
 import { quickSearchOptions } from "@/app/_constants/_search";
+import Dialog_Login from "./_dialog-login";
+
+//contexts
+import useAppUtils from "@/app/_contexts/utils";
 
 const Menu_Mobile = ({ session }: any) => {
 
-    const [openSheetMenu, setOpenSheetMenu] = useState(false)
-    const [openDialogLogin, setOpenDialogLogin] = useState(false)
-    const [loadingSignout, setLoadingSignout] = useState(false)
+    const { openSheetMenu, setOpenSheetMenu, setOpenDialogLogado } = useAppUtils()
 
-    const handleSignout = async () => {
-        setLoadingSignout(true)
-        try {
-            await signOut()
-        } catch (error) {
-            console.log(error)
-        } finally {
-            setLoadingSignout(false)
-        }
-    }
+    const [openDialogLogin, setOpenDialogLogin] = useState(false)
+
+    const handleSignout = () => setOpenDialogLogado(true)
 
     return (
         <>
@@ -77,30 +72,36 @@ const Menu_Mobile = ({ session }: any) => {
                             <Separator className='my-3' />
 
                             <div className='flex flex-col gap-3' >
-                                <div className='text-white flex items-center gap-4 bg-primary rounded-lg px-3 py-3' >
-                                    <FaHome size={18} />
-                                    <span className='text-sm' >Ínicio</span>
-                                </div>
-                                <div className='text-white flex items-center gap-4 bg- rounded-lg px-3 py-3' >
-                                    <FaCalendarAlt size={18} />
-                                    <span className='text-sm' >Agendamento</span>
-                                </div>
+                                <Button variant='ghost' className='justify-start items-center bg-primary px-3 py-3' asChild >
+                                    <Link href='/' className='text-white flex gap-4 ' >
+                                        <FaHome size={18} />
+                                        <span className='text-sm' >Ínicio</span>
+                                    </Link>
+                                </Button>
+                                <Button variant='ghost' className='justify-start items-center bg- px-3 py-3' asChild >
+                                    <Link href='/' className='text-white flex gap-4 ' >
+                                        <FaCalendarAlt size={18} />
+                                        <span className='text-sm' >Agendamento</span>
+                                    </Link>
+                                </Button>
                             </div>
 
                             <Separator className='my-3' />
 
-                            <div className='flex flex-col gap-4 px-3' >
+                            <div className='flex flex-col gap-4' >
                                 {
                                     quickSearchOptions.map((item) => (
-                                        <div key={item.imageUrl} className="text-white flex gap-4 items-center py-1" >
-                                            <Image
-                                                src={item.imageUrl}
-                                                alt={item.title}
-                                                height={18}
-                                                width={18}
-                                            />
-                                            <span className='text-sm' >{item.title}</span>
-                                        </div>
+                                        <Button variant='ghost' key={item.imageUrl} className='py-1 px-3 justify-start items-center' asChild >
+                                            <Link href={`/barbershops?service=${item.title}`} className="text-white flex gap-4 items-center" >
+                                                <Image
+                                                    src={item.imageUrl}
+                                                    alt={item.title}
+                                                    height={18}
+                                                    width={18}
+                                                />
+                                                <span className='text-sm' >{item.title}</span>
+                                            </Link>
+                                        </Button>
                                     ))
                                 }
                             </div>
@@ -110,17 +111,12 @@ const Menu_Mobile = ({ session }: any) => {
                             {
                                 session
                                 &&
-                                <Button disabled={loadingSignout} variant='ghost' onClick={handleSignout} className='w-full justify-start flex gap-4 items-center px-3 text-white' >
-                                    {
-                                        loadingSignout
-                                            ?
-                                            <AiOutlineLoading3Quarters size={18} className="animate-spin" />
-                                            :
-                                            <IoExitOutline size={18} />
-                                    }
-                                    <span className='text-sm' >Sair da conta</span>
-                                </Button>
-
+                                <SheetClose className='w-full' >
+                                    <Button variant='ghost' onClick={handleSignout} className='w-full justify-start flex gap-4 items-center px-3 text-white' >
+                                        <IoExitOutline size={18} />
+                                        <span className='text-sm' >Sair da conta</span>
+                                    </Button>
+                                </SheetClose>
                             }
 
                         </SheetDescription>

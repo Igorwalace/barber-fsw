@@ -15,10 +15,13 @@ import {
 import { useState } from "react";
 import { signOut } from "next-auth/react";
 
+//contexts
+import useAppUtils from "@/app/_contexts/utils";
 
 const Perfil_Logado = ({ session }: any) => {
 
-    const [openDialogLogado, setOpenDialogLogado] = useState(false)
+    const { openDialogLogado, setOpenDialogLogado } = useAppUtils()
+    
     const [loadingSignout, setLoadingSignout] = useState(false)
 
     const handleLoadingSignOut = async () => {
@@ -48,7 +51,7 @@ const Perfil_Logado = ({ session }: any) => {
                             Deseja sair da plataforma?
                         </DialogDescription>
                         <DialogDescription className='pt-2 w-full flex gap-2' >
-                            <Button variant='secondary' className='gap-1 w-2/4' disabled={loadingSignout} onClick={() => setOpenDialogLogado(false)} >Voltar</Button>
+                            <Button variant='secondary' className='gap-1 w-2/4' onClick={() => setOpenDialogLogado(false)} >Voltar</Button>
                             <Button variant='destructive' className={`gap-1 w-2/4`} disabled={loadingSignout} onClick={handleLoadingSignOut} >
                                 {
                                     loadingSignout

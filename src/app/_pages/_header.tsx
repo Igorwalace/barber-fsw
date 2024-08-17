@@ -14,7 +14,7 @@ import Logo from '../_components-g/logo-icon'
 //pages
 import Perfil_Login from './components/_perfil-login'
 import Perfil_Logado from './components/_perfil-logado'
-import Menu_Mobile from './components/menu-mobile'
+import Menu_Mobile from './components/_menu-mobile'
 
 const Header = async () => {
 
