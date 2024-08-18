@@ -1,9 +1,8 @@
 'use client'
 //react-icons
-import { IoExitOutline, IoReloadCircleOutline } from "react-icons/io5";
+import { IoExitOutline } from "react-icons/io5";
 import { FiMenu } from "react-icons/fi";
 import { FaHome, FaCalendarAlt } from "react-icons/fa";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 //shadcn
 import { Button } from "@/app/_services/components/ui/button";
@@ -21,8 +20,6 @@ import { Avatar, AvatarImage } from "@/app/_services/components/ui/avatar";
 //react-next
 import Link from "next/link";
 import Image from "next/image";
-import { signOut } from "next-auth/react";
-import { useState } from "react";
 
 //pages
 import { quickSearchOptions } from "@/app/_constants/_search";
@@ -33,9 +30,7 @@ import useAppUtils from "@/app/_contexts/utils";
 
 const Menu_Mobile = ({ session }: any) => {
 
-    const { openSheetMenu, setOpenSheetMenu, setOpenDialogLogado } = useAppUtils()
-
-    const [openDialogLogin, setOpenDialogLogin] = useState(false)
+    const { openSheetMenu, setOpenSheetMenu, setOpenDialogLogado, setOpenDialogLogin  } = useAppUtils()
 
     const handleSignout = () => setOpenDialogLogado(true)
 
@@ -123,7 +118,7 @@ const Menu_Mobile = ({ session }: any) => {
                     </SheetHeader>
                 </SheetContent>
             </Sheet>
-            <Dialog_Login openDialogLogin={openDialogLogin} setOpenDialogLogin={setOpenDialogLogin} />
+            <Dialog_Login />
         </>
     );
 }

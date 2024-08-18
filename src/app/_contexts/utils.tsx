@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useState } from "react"
 
 export const AppContext = createContext<any>(undefined);
 
@@ -8,9 +8,20 @@ export function AppUtils({ children }: {
 }) {
     const [openSheetMenu, setOpenSheetMenu] = useState(false)
     const [openDialogLogado, setOpenDialogLogado] = useState(false)
+    const [openDialogLogin, setOpenDialogLogin] = useState(false)
+    const [dialogLoginFinally, setDialogLoginFinally] = useState(false)
 
     return (
-        <AppContext.Provider value={{ openSheetMenu, setOpenSheetMenu, openDialogLogado, setOpenDialogLogado }} >
+        <AppContext.Provider value={{
+            openSheetMenu,
+            setOpenSheetMenu,
+            openDialogLogado,
+            setOpenDialogLogado,
+            openDialogLogin,
+            setOpenDialogLogin,
+            dialogLoginFinally,
+            setDialogLoginFinally
+        }} >
             {children}
         </AppContext.Provider>
     )

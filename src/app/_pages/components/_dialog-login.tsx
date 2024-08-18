@@ -1,3 +1,4 @@
+'use client'
 
 import {
     Dialog,
@@ -18,14 +19,14 @@ import { Button } from '@/app/_services/components/ui/button'
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 
-interface StatesProps {
-    openDialogLogin: boolean
-    setOpenDialogLogin: any
-}
+//contexts
+import useAppUtils from "@/app/_contexts/utils";
 
-const Dialog_Login = ({ setOpenDialogLogin, openDialogLogin }: StatesProps) => {
+const Dialog_Login = () => {
 
     const [loadingSignin, setLoadingSignin] = useState(false)
+
+    const { openDialogLogin, setOpenDialogLogin, dialogLoginFinally, setDialogLoginFinally } = useAppUtils()
 
     const handleSignin = async () => {
         setLoadingSignin(true)
@@ -35,6 +36,7 @@ const Dialog_Login = ({ setOpenDialogLogin, openDialogLogin }: StatesProps) => {
             console.log(error)
         } finally {
             setLoadingSignin(false)
+            setDialogLoginFinally(true)
         }
     }
 
@@ -48,20 +50,27 @@ const Dialog_Login = ({ setOpenDialogLogin, openDialogLogin }: StatesProps) => {
                             Conecte-se usando sua conta do Google.
                         </DialogDescription>
                         <DialogDescription className='pt-2 w-full' >
-                            <Button disabled={loadingSignin} variant='outline' className='gap-2 w-full' onClick={handleSignin} >
+                            <Button disabled={loadingSignin && dialogLoginFinally} variant='outline' className='gap-2 w-full' onClick={handleSignin} >
 
                                 {
-                                    loadingSignin
+                                    dialogLoginFinally
                                         ?
                                         <>
                                             <AiOutlineLoading3Quarters size={18} className="animate-spin" />
-                                            Carregando
+                                            Redirecionando
                                         </>
                                         :
-                                        <>
-                                            <FaGoogle />
-                                            Google
-                                        </>
+                                        loadingSignin
+                                            ?
+                                            <>
+                                                <AiOutlineLoading3Quarters size={18} className="animate-spin" />
+                                                Carregando
+                                            </>
+                                            :
+                                            <>
+                                                <FaGoogle />
+                                                Google
+                                            </>
                                 }
 
                             </Button>
