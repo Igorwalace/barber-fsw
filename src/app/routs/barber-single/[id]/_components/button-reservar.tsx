@@ -52,9 +52,14 @@ const Button_Reservar = ({ barberservice }: BarberServiceProps) => {
 
     const [openReserve, useOpenReserve] = useState(false)
     const [date, setDate] = useState<Date | undefined>(undefined)
+    const [selectedDate, setSelectedDate] = useState('')
 
     const HandleReservar = (id: string) => {
         useOpenReserve(true)
+    }
+
+    const handleTimeSelect = (time: string) => {
+        setSelectedDate(time)
     }
 
     const handleSelectDay = (dateSelect: Date | undefined) => {
@@ -112,9 +117,11 @@ const Button_Reservar = ({ barberservice }: BarberServiceProps) => {
                                     TIME_LIST.map((time) => (
                                         <Button
                                             key={time}
-                                            variant="outline"
+                                            variant={
+                                                selectedDate === time ? 'default' : 'outline'
+                                            }
                                             className="rounded-full"
-                                        // onClick={() => handleTime\elect(time)}
+                                            onClick={() => handleTimeSelect(time)}
                                         >
                                             {time}
                                         </Button>
@@ -134,7 +141,7 @@ const Button_Reservar = ({ barberservice }: BarberServiceProps) => {
                         <Separator />
                     </SheetDescription>
                 </SheetContent>
-            </Sheet>
+            </Sheet >
 
         </>
     )
