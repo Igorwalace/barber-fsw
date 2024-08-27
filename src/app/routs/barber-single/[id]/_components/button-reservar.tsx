@@ -63,6 +63,7 @@ const Button_Reservar = ({ barberservice }: BarberServiceProps) => {
     }
 
     const handleSelectDay = (dateSelect: Date | undefined) => {
+        setSelectedDate('')
         setDate(dateSelect)
     }
 
