@@ -75,7 +75,7 @@ const Button_Reservar = ({ barberservice, barbershop }: BarberServiceProps) => {
             <Button onClick={() => HandleReservar(barberservice.id)} variant='secondary' >Reservar</Button>
 
             <Sheet open={openReserve} onOpenChange={useOpenReserve} >
-                <SheetContent className='overflow-y-auto [&::-webkit-scrollbar]:hidden' >
+                <SheetContent className='overflow-y-auto [&::-webkit-scrollbar]:hidden w-[90%]' >
                     <SheetHeader>
                         <SheetTitle className='text-lg mb-3' >Fazer Reservar - {barberservice.name}</SheetTitle>
                         <Separator />
@@ -151,17 +151,17 @@ const Button_Reservar = ({ barberservice, barbershop }: BarberServiceProps) => {
                                         <h1 className='text-sm text-white font-bold' >R${Number(barberservice.price)}</h1>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <h1 className='font-extrabold text-sm text-[#838896]' >Data</h1>
+                                        <h1 className='text-sm text-[#838896]' >Data</h1>
                                         <h1 className='text-sm' >{format(day, "d 'de' MMMM", {
                                             locale: ptBR
                                         })}</h1>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <h1 className='font-extrabold text-sm text-[#838896]' >Horário</h1>
+                                        <h1 className='text-sm text-[#838896]' >Horário</h1>
                                         <h1 className='text-sm' >{selectedTime}</h1>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <h1 className='font-extrabold text-sm text-[#838896]' >Barbearia</h1>
+                                        <h1 className='text-sm text-[#838896]' >Barbearia</h1>
                                         <h1 className='text-sm' >{barbershop.name}</h1>
                                     </div>
                                 </div>
