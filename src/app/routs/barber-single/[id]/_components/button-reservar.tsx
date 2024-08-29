@@ -16,15 +16,17 @@ import {
 } from "@/app/_services/components/ui/sheet"
 
 //prisma
-import { BarbershopService } from '@prisma/client'
+import { Barbershop, BarbershopService } from '@prisma/client'
 import { Separator } from '@/app/_services/components/ui/separator'
 import { Calendar } from '@/app/_services/components/ui/calendar'
+import { format } from 'date-fns';
 
 interface BarberServiceProps {
     barberservice: BarbershopService
+    barbershop: Barbershop
 }
 
-const Button_Reservar = ({ barberservice }: BarberServiceProps) => {
+const Button_Reservar = ({ barberservice, barbershop }: BarberServiceProps) => {
 
     const TIME_LIST = [
         "08:00",
@@ -51,20 +53,21 @@ const Button_Reservar = ({ barberservice }: BarberServiceProps) => {
     ]
 
     const [openReserve, useOpenReserve] = useState(false)
-    const [date, setDate] = useState<Date | undefined>(undefined)
-    const [selectedDate, setSelectedDate] = useState('')
+    const [day, setday] = useState<Date | undefined>(undefined)
+    const [selectedTime, setselectedTime] = useState('')
 
     const HandleReservar = (id: string) => {
         useOpenReserve(true)
     }
 
     const handleTimeSelect = (time: string) => {
-        setSelectedDate(time)
+        if(selectedTime === time) return setselectedTime('')
+        setselectedTime(time)
     }
 
     const handleSelectDay = (dateSelect: Date | undefined) => {
-        setSelectedDate('')
-        setDate(dateSelect)
+        setselectedTime('')
+        setday(dateSelect)
     }
 
     return (
@@ -82,7 +85,7 @@ const Button_Reservar = ({ barberservice }: BarberServiceProps) => {
                             <Calendar
                                 mode="single"
                                 locale={ptBR}
-                                selected={date}
+                                selected={day}
                                 onSelect={handleSelectDay}
                                 fromDate={new Date()}
                                 styles={{
@@ -111,7 +114,7 @@ const Button_Reservar = ({ barberservice }: BarberServiceProps) => {
                             />
                         </div>
                         {
-                            date &&
+                            day &&
                             <div className="lg:grid grid-cols-4 py-5 justify-center flex gap-3 overflow-x-auto pl-0 [&::-webkit-scrollbar]:hidden">
                                 {
                                     TIME_LIST.length > 0 &&
@@ -119,7 +122,7 @@ const Button_Reservar = ({ barberservice }: BarberServiceProps) => {
                                         <Button
                                             key={time}
                                             variant={
-                                                selectedDate === time ? 'default' : 'outline'
+                                                selectedTime === time ? 'default' : 'outline'
                                             }
                                             className="rounded-full"
                                             onClick={() => handleTimeSelect(time)}
@@ -131,15 +134,41 @@ const Button_Reservar = ({ barberservice }: BarberServiceProps) => {
                             </div>
                         }
                         {
-                            !date &&
+                            !day &&
                             <div className='py-5 pl-2' >
                                 <p className="text-xs">
                                     Não há horários disponíveis para este dia.
                                 </p>
                             </div>
                         }
+                        <Separator className='mb-5' />
+                        {
+                            selectedTime && day &&
+                            <>
+                                <div className="bg-card rounded-xl p-3 flex flex-col gap-4">
+                                    <div className="flex items-center justify-between">
+                                        <h1 className='font-extrabold text-white' >{barberservice.name}</h1>
+                                        <h1 className='text-sm text-white font-bold' >R${Number(barberservice.price)}</h1>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <h1 className='font-extrabold text-sm text-[#838896]' >Data</h1>
+                                        <h1 className='text-sm' >{format(day, "d 'de' MMMM", {
+                                            locale: ptBR
+                                        })}</h1>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <h1 className='font-extrabold text-sm text-[#838896]' >Horário</h1>
+                                        <h1 className='text-sm' >{selectedTime}</h1>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <h1 className='font-extrabold text-sm text-[#838896]' >Barbearia</h1>
+                                        <h1 className='text-sm' >{barbershop.name}</h1>
+                                    </div>
+                                </div>
+                                <Button variant='default' className='w-full mt-5' >Continuar</Button>
+                            </>
+                        }
 
-                        <Separator />
                     </SheetDescription>
                 </SheetContent>
             </Sheet >
