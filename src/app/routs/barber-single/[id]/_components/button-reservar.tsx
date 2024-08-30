@@ -23,7 +23,7 @@ import { format } from 'date-fns';
 
 interface BarberServiceProps {
     barberservice: BarbershopService
-    barbershop: Barbershop
+    barbershop: Pick<Barbershop, 'name'>
 }
 
 const Button_Reservar = ({ barberservice, barbershop }: BarberServiceProps) => {
@@ -61,7 +61,7 @@ const Button_Reservar = ({ barberservice, barbershop }: BarberServiceProps) => {
     }
 
     const handleTimeSelect = (time: string) => {
-        if(selectedTime === time) return setselectedTime('')
+        if (selectedTime === time) return setselectedTime('')
         setselectedTime(time)
     }
 
@@ -77,7 +77,7 @@ const Button_Reservar = ({ barberservice, barbershop }: BarberServiceProps) => {
             <Sheet open={openReserve} onOpenChange={useOpenReserve} >
                 <SheetContent className='overflow-y-auto [&::-webkit-scrollbar]:hidden w-[90%]' >
                     <SheetHeader>
-                        <SheetTitle className='text-lg mb-3' >Fazer Reservar - {barberservice.name}</SheetTitle>
+                        <SheetTitle className='text-lg mb-3 justify-start text-left' >Fazer Reservar - {barberservice.name}</SheetTitle>
                         <Separator />
                     </SheetHeader>
                     <SheetDescription className='w-full' >
@@ -88,8 +88,9 @@ const Button_Reservar = ({ barberservice, barbershop }: BarberServiceProps) => {
                                 selected={day}
                                 onSelect={handleSelectDay}
                                 fromDate={new Date()}
+                                className='w-full'
                                 styles={{
-                                    head: {
+                                    head_cell: {
                                         width: "100%",
                                         textTransform: "capitalize",
                                     },
@@ -137,7 +138,7 @@ const Button_Reservar = ({ barberservice, barbershop }: BarberServiceProps) => {
                             !day &&
                             <div className='py-5 pl-2' >
                                 <p className="text-xs">
-                                    Não há horários disponíveis para este dia.
+                                    Selecione um dia primeiro.
                                 </p>
                             </div>
                         }

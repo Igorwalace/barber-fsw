@@ -20,7 +20,6 @@ import Button_Reservar from './_components/button-reservar'
 
 //shadcn
 import { Separator } from '@/app/_services/components/ui/separator'
-import { Button } from '@/app/_services/components/ui/button'
 
 interface BaberSingleProps {
     params: {
