@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 //pages
 
@@ -22,19 +22,72 @@ import { useToast } from '@/app/_services/components/ui/use-toast';
 import { Barbershop, BarbershopService, Booking } from '@prisma/client'
 import { Separator } from '@/app/_services/components/ui/separator'
 import { Calendar } from '@/app/_services/components/ui/calendar'
-import { format, set } from 'date-fns';
+import { format, isPast, isToday, set } from 'date-fns';
 
 //db/funcao createbooking
 import { CreateBooking } from '@/app/_services/_db-create-booking/_create-booking';
 
 //react-icons
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { GETBookings } from './get-bookings';
 
 interface BarberServiceProps {
     barberservice: BarbershopService
     barbershop: Pick<Barbershop, 'name'>
     bookings: Booking[]
     session: any
+}
+
+
+const TIME_LIST = [
+    "08:00",
+    "08:30",
+    "09:00",
+    "09:30",
+    "10:00",
+    "10:30",
+    "11:00",
+    "11:30",
+    "12:00",
+    "12:30",
+    "13:00",
+    "13:30",
+    "14:00",
+    "14:30",
+    "15:00",
+    "15:30",
+    "16:00",
+    "16:30",
+    "17:00",
+    "17:30",
+    "18:00",
+]
+
+interface GetTimeListProps {
+    bookings: Booking[]
+    selectedDay: Date
+}
+
+const getTimeList = ({ bookings, selectedDay }: GetTimeListProps) => {
+    return TIME_LIST.filter((time) => {
+        const hour = Number(time.split(":")[0])
+        const minutes = Number(time.split(":")[1])
+
+        const timeIsOnThePast = isPast(set(new Date(), { hours: hour, minutes }))
+        if (timeIsOnThePast && isToday(selectedDay)) {
+            return false
+        }
+
+        const hasBookingOnCurrentTime = bookings.some(
+            (booking) =>
+                booking.date.getHours() === hour &&
+                booking.date.getMinutes() === minutes,
+        )
+        if (hasBookingOnCurrentTime) {
+            return false
+        }
+        return true
+    })
 }
 
 const Button_Reservar = ({ barberservice, barbershop, session, bookings }: BarberServiceProps) => {
@@ -45,29 +98,29 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
     const [selectedTime, setselectedTime] = useState('')
     const { toast } = useToast()
 
-    const TIME_LIST = [
-        "08:00",
-        "08:30",
-        "09:00",
-        "09:30",
-        "10:00",
-        "10:30",
-        "11:00",
-        "11:30",
-        "12:00",
-        "12:30",
-        "13:00",
-        "13:30",
-        "14:00",
-        "14:30",
-        "15:00",
-        "15:30",
-        "16:00",
-        "16:30",
-        "17:00",
-        "17:30",
-        "18:00",
-    ]
+
+    const [dayBookings, setDayBookings] = useState<Booking[]>([])
+    const [bookingSheetIsOpen, setBookingSheetIsOpen] = useState(false)
+
+    useEffect(() => {
+        const fetch = async () => {
+            if (!day) return
+            const bookings = await GETBookings({
+                date: day,
+                serviceId: barberservice.id,
+            })
+            setDayBookings(bookings)
+        }
+        fetch()
+    }, [day, barberservice.id])
+
+    const timeList = useMemo(() => {
+        if (!day) return []
+        return getTimeList({
+            bookings: dayBookings,
+            selectedDay: day,
+        })
+    }, [dayBookings, day])
 
     const handleReserve = (id: string) => {
         if (!session?.user?.id) {
@@ -158,31 +211,31 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
                         </div>
                         {
                             day &&
-                            <div className="lg:grid grid-cols-4 py-5 justify-center flex gap-3 overflow-x-auto pl-0 [&::-webkit-scrollbar]:hidden">
+                            <>
                                 {
-                                    TIME_LIST.length > 0 &&
-                                    TIME_LIST.map((time) => (
-                                        <Button
-                                            key={time}
-                                            variant={
-                                                selectedTime === time ? 'default' : 'outline'
+                                    timeList.length > 0 ?
+                                        <div className="lg:grid grid-cols-4 py-5 justify-center flex gap-3 overflow-x-auto pl-0 [&::-webkit-scrollbar]:hidden">
+                                            {
+                                                timeList.map((time) => (
+                                                    <Button
+                                                        key={time}
+                                                        variant={
+                                                            selectedTime === time ? 'default' : 'outline'
+                                                        }
+                                                        className="rounded-full"
+                                                        onClick={() => handleTimeSelect(time)}
+                                                    >
+                                                        {time}
+                                                    </Button>
+                                                ))
                                             }
-                                            className="rounded-full"
-                                            onClick={() => handleTimeSelect(time)}
-                                        >
-                                            {time}
-                                        </Button>
-                                    ))
+                                        </div>
+                                        :
+                                        <p className="text-xs py-5">
+                                            Não há horários disponíveis para este dia.
+                                        </p>
                                 }
-                            </div>
-                        }
-                        {
-                            !day &&
-                            <div className='py-5 pl-2' >
-                                <p className="text-xs">
-                                    Selecione um dia primeiro.
-                                </p>
-                            </div>
+                            </>
                         }
                         <Separator className='mb-5' />
                         {
