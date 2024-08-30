@@ -41,6 +41,8 @@ const Page = async ({ params }: BaberSingleProps) => {
         },
     })
 
+    const bookings = await prisma.booking.findMany()
+
     if (!barbersingle) {
         return notFound()
     }
@@ -90,7 +92,7 @@ const Page = async ({ params }: BaberSingleProps) => {
                                             <h1 className='text-sm text-[#838896] lg:max-w-56' >{service.description}</h1>
                                             <div className='flex justify-between items-center' >
                                                 <span className='text-primary text-sm font-extrabold' >R$ {Number(service.price)}</span>
-                                                <Button_Reservar session={session} barbershop={barbersingle} barberservice={service} />
+                                                <Button_Reservar bookings={bookings} session={session} barbershop={barbersingle} barberservice={service} />
                                             </div>
                                         </div>
                                     </div>

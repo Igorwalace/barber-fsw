@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 
+//pages
+
 //local
 import { ptBR } from "date-fns/locale";
 
@@ -17,7 +19,7 @@ import {
 import { useToast } from '@/app/_services/components/ui/use-toast';
 
 //prisma
-import { Barbershop, BarbershopService } from '@prisma/client'
+import { Barbershop, BarbershopService, Booking } from '@prisma/client'
 import { Separator } from '@/app/_services/components/ui/separator'
 import { Calendar } from '@/app/_services/components/ui/calendar'
 import { format, set } from 'date-fns';
@@ -31,10 +33,17 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 interface BarberServiceProps {
     barberservice: BarbershopService
     barbershop: Pick<Barbershop, 'name'>
+    bookings: Booking[]
     session: any
 }
 
-const Button_Reservar = ({ barberservice, barbershop, session }: BarberServiceProps) => {
+const Button_Reservar = ({ barberservice, barbershop, session, bookings }: BarberServiceProps) => {
+
+    const [openReserve, setOpenReserve] = useState(false)
+    const [loadingBooking, setLoadingBooking] = useState(false)
+    const [day, setday] = useState<Date | undefined>(undefined)
+    const [selectedTime, setselectedTime] = useState('')
+    const { toast } = useToast()
 
     const TIME_LIST = [
         "08:00",
@@ -60,13 +69,15 @@ const Button_Reservar = ({ barberservice, barbershop, session }: BarberServicePr
         "18:00",
     ]
 
-    const [openReserve, setOpenReserve] = useState(false)
-    const [loadingBooking, setLoadingBooking] = useState(false)
-    const [day, setday] = useState<Date | undefined>(undefined)
-    const [selectedTime, setselectedTime] = useState('')
-    const { toast } = useToast()
-
     const handleReserve = (id: string) => {
+        if (!session?.user?.id) {
+            toast({
+                variant: "destructive",
+                title: "Atenção!",
+                description: "Para fazer uma reserva você precisa fazer login.",
+            })
+            return
+        }
         setOpenReserve(true)
     }
 
@@ -98,6 +109,7 @@ const Button_Reservar = ({ barberservice, barbershop, session }: BarberServicePr
         })
         setLoadingBooking(false)
         toast({
+            style: { backgroundColor: 'white', color: 'black', border: 'none' },
             title: "Concluído",
             description: "Reserva concluída com sucesso!",
         })
@@ -196,22 +208,22 @@ const Button_Reservar = ({ barberservice, barbershop, session }: BarberServicePr
                                         <h1 className='text-sm' >{barbershop.name}</h1>
                                     </div>
                                 </div>
-                                <Button disabled={loadingBooking} onClick={handleCreateBooking} variant='default' className='w-full mt-5 gap-2 flex' >
-                                    {
-                                        loadingBooking
-                                            ?
-                                            <>
-                                                <AiOutlineLoading3Quarters size={18} className="animate-spin" />
-                                                Fazendo reserva
-                                            </>
-                                            :
-                                            <>
-                                                Fazer reserva
-                                            </>
-                                    }
-                                </Button>
                             </>
                         }
+                        <Button disabled={loadingBooking || !selectedTime} onClick={handleCreateBooking} variant='default' className='w-full mt-5 gap-2 flex' >
+                            {
+                                loadingBooking
+                                    ?
+                                    <>
+                                        <AiOutlineLoading3Quarters size={18} className="animate-spin" />
+                                        Fazendo reserva
+                                    </>
+                                    :
+                                    <>
+                                        Fazer reserva
+                                    </>
+                            }
+                        </Button>
 
                     </SheetDescription>
                 </SheetContent>
