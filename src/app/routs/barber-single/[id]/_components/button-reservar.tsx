@@ -14,19 +14,27 @@ import {
     SheetHeader,
     SheetTitle,
 } from "@/app/_services/components/ui/sheet"
+import { useToast } from '@/app/_services/components/ui/use-toast';
 
 //prisma
 import { Barbershop, BarbershopService } from '@prisma/client'
 import { Separator } from '@/app/_services/components/ui/separator'
 import { Calendar } from '@/app/_services/components/ui/calendar'
-import { format } from 'date-fns';
+import { format, set } from 'date-fns';
+
+//db/funcao createbooking
+import { CreateBooking } from '@/app/_services/_db-create-booking/_create-booking';
+
+//react-icons
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 interface BarberServiceProps {
     barberservice: BarbershopService
     barbershop: Pick<Barbershop, 'name'>
+    session: any
 }
 
-const Button_Reservar = ({ barberservice, barbershop }: BarberServiceProps) => {
+const Button_Reservar = ({ barberservice, barbershop, session }: BarberServiceProps) => {
 
     const TIME_LIST = [
         "08:00",
@@ -52,12 +60,14 @@ const Button_Reservar = ({ barberservice, barbershop }: BarberServiceProps) => {
         "18:00",
     ]
 
-    const [openReserve, useOpenReserve] = useState(false)
+    const [openReserve, setOpenReserve] = useState(false)
+    const [loadingBooking, setLoadingBooking] = useState(false)
     const [day, setday] = useState<Date | undefined>(undefined)
     const [selectedTime, setselectedTime] = useState('')
+    const { toast } = useToast()
 
-    const HandleReservar = (id: string) => {
-        useOpenReserve(true)
+    const handleReserve = (id: string) => {
+        setOpenReserve(true)
     }
 
     const handleTimeSelect = (time: string) => {
@@ -69,12 +79,36 @@ const Button_Reservar = ({ barberservice, barbershop }: BarberServiceProps) => {
         setselectedTime('')
         setday(dateSelect)
     }
+    const handleCreateBooking = async () => {
+        if (!day || !selectedTime) return
+
+        setLoadingBooking(true)
+
+        const hour = selectedTime.split(':')[0]
+        const minute = selectedTime.split(':')[1]
+        const newDate = set(day, {
+            minutes: Number(minute),
+            hours: Number(hour)
+        })
+
+        await CreateBooking({
+            serviceId: barberservice.id,
+            userId: session?.user?.id,
+            date: newDate
+        })
+        setLoadingBooking(false)
+        toast({
+            title: "Concluído",
+            description: "Reserva concluída com sucesso!",
+        })
+        setOpenReserve(false)
+    }
 
     return (
         <>
-            <Button onClick={() => HandleReservar(barberservice.id)} variant='secondary' >Reservar</Button>
+            <Button onClick={() => handleReserve(barberservice.id)} variant='secondary' >Reservar</Button>
 
-            <Sheet open={openReserve} onOpenChange={useOpenReserve} >
+            <Sheet open={openReserve} onOpenChange={setOpenReserve} >
                 <SheetContent className='overflow-y-auto [&::-webkit-scrollbar]:hidden w-[90%]' >
                     <SheetHeader>
                         <SheetTitle className='text-lg mb-3 justify-start text-left' >Fazer Reservar - {barberservice.name}</SheetTitle>
@@ -90,10 +124,6 @@ const Button_Reservar = ({ barberservice, barbershop }: BarberServiceProps) => {
                                 fromDate={new Date()}
                                 className='w-full'
                                 styles={{
-                                    head_cell: {
-                                        width: "100%",
-                                        textTransform: "capitalize",
-                                    },
                                     cell: {
                                         width: "100%",
                                     },
@@ -166,7 +196,20 @@ const Button_Reservar = ({ barberservice, barbershop }: BarberServiceProps) => {
                                         <h1 className='text-sm' >{barbershop.name}</h1>
                                     </div>
                                 </div>
-                                <Button variant='default' className='w-full mt-5' >Continuar</Button>
+                                <Button disabled={loadingBooking} onClick={handleCreateBooking} variant='default' className='w-full mt-5 gap-2 flex' >
+                                    {
+                                        loadingBooking
+                                            ?
+                                            <>
+                                                <AiOutlineLoading3Quarters size={18} className="animate-spin" />
+                                                Fazendo reserva
+                                            </>
+                                            :
+                                            <>
+                                                Fazer reserva
+                                            </>
+                                    }
+                                </Button>
                             </>
                         }
 

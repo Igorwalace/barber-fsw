@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { notFound } from 'next/navigation'
+import { auth } from '@/app/_services/auth/auth'
 
 //prisma
 import { prisma } from '@/app/_services/prisma/_prisma'
@@ -28,6 +29,8 @@ interface BaberSingleProps {
 }
 
 const Page = async ({ params }: BaberSingleProps) => {
+
+    const session = await auth()
 
     const barbersingle = await prisma.barbershop.findUnique({
         where: {
@@ -87,7 +90,7 @@ const Page = async ({ params }: BaberSingleProps) => {
                                             <h1 className='text-sm text-[#838896] lg:max-w-56' >{service.description}</h1>
                                             <div className='flex justify-between items-center' >
                                                 <span className='text-primary text-sm font-extrabold' >R$ {Number(service.price)}</span>
-                                                <Button_Reservar barbershop={barbersingle} barberservice={service} />
+                                                <Button_Reservar session={session} barbershop={barbersingle} barberservice={service} />
                                             </div>
                                         </div>
                                     </div>
