@@ -87,7 +87,7 @@ const Menu_Mobile = ({ session }: any) => {
                                 {
                                     quickSearchOptions.map((item) => (
                                         <Button variant='ghost' key={item.imageUrl} className='py-1 px-3 justify-start items-center' asChild >
-                                            <Link href={`/barbershops?service=${item.title}`} className="text-white flex gap-4 items-center" >
+                                            <Link href='/' className="text-white flex gap-4 items-center" >
                                                 <Image
                                                     src={item.imageUrl}
                                                     alt={item.title}
