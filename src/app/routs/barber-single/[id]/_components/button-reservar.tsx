@@ -30,6 +30,7 @@ import { CreateBooking } from '@/app/_services/_db-create-booking/_create-bookin
 //react-icons
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { GETBookings } from './get-bookings';
+import { useRouter } from 'next/navigation';
 
 interface BarberServiceProps {
     barberservice: BarbershopService
@@ -97,7 +98,7 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
     const [day, setday] = useState<Date | undefined>(undefined)
     const [selectedTime, setselectedTime] = useState('')
     const { toast } = useToast()
-
+    const router = useRouter()
 
     const [dayBookings, setDayBookings] = useState<Booking[]>([])
     const [bookingSheetIsOpen, setBookingSheetIsOpen] = useState(false)
@@ -166,6 +167,8 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
             title: "Concluído",
             description: "Reserva concluída com sucesso!",
         })
+        setselectedTime('')
+        setday(undefined)
         setOpenReserve(false)
     }
 
