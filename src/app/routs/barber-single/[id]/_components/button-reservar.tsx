@@ -31,6 +31,7 @@ import { CreateBooking } from '@/app/_services/_db-create-booking/_create-bookin
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { GETBookings } from './get-bookings';
 import { useRouter } from 'next/navigation';
+import { Checkbookings } from './check-bookings';
 
 interface BarberServiceProps {
     barberservice: BarbershopService
@@ -38,7 +39,6 @@ interface BarberServiceProps {
     bookings: Booking[]
     session: any
 }
-
 
 const TIME_LIST = [
     "08:00",
@@ -113,7 +113,7 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
             setDayBookings(bookings)
         }
         fetch()
-    }, [day, barberservice.id])
+    }, [day, barberservice.barbershopId])
 
     const timeList = useMemo(() => {
         if (!day) return []
@@ -155,6 +155,20 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
             minutes: Number(minute),
             hours: Number(hour)
         })
+
+        const checkbooking = await Checkbookings({
+            date: newDate,
+            barbershopId: barberservice.barbershopId
+        })
+
+        if (checkbooking.length > 0) {
+            toast({
+                variant: "destructive",
+                description: "Este horário não está mais disponível. Por favor, escolha outro.",
+            })
+            setLoadingBooking(false)
+            return
+        }
 
         await CreateBooking({
             serviceId: barberservice.id,

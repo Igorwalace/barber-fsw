@@ -16,7 +16,7 @@ export const GETBookings = async ({ date, barbershopId }: GETBookings) => {
                 gte: startOfDay(date),
                 
             },
-            barbershopId: barbershopId
+            barbershopId
         }  
     })
     return bookings
