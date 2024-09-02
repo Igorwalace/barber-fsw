@@ -232,7 +232,7 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
                             <>
                                 {
                                     timeList.length > 0 ?
-                                        <div className="lg:grid grid-cols-4 py-5 justify-center flex gap-3 overflow-x-auto pl-0 [&::-webkit-scrollbar]:hidden">
+                                        <div className="grid grid-cols-4 py-5 justify-center gap-3 pl-0 ">
                                             {
                                                 timeList.map((time) => (
                                                     <Button
