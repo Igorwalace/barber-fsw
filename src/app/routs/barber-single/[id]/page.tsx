@@ -79,7 +79,7 @@ const Page = async ({ params }: BaberSingleProps) => {
                             {
                                 barbersingle.services.map((service) => (
                                     <div key={service.id} className='bg-card p-3 flex gap-3 rounded-lg' >
-                                        <div className='relative w-28 h-28' >
+                                        <div className='relative w-36 h-28' >
                                             <Image
                                                 fill
                                                 className='rounded-lg object-cover'
