@@ -26,19 +26,20 @@ const Phone_Item = ({ phone }: PhoneProps) => {
 
     return (
         <div className="flex justify-between" key={phone}>
-            
+
             <div className="flex items-center gap-2">
                 <SmartphoneIcon />
                 <p className="text-sm">{phone}</p>
             </div>
-            
+
             <Button
                 variant="secondary"
+                disabled={copied}
                 size="sm"
                 onClick={() => handleCopyPhoneClick(phone)}
             >
                 {
-                    copied ? 'Copiado' : 'Copiar' 
+                    copied ? 'Copiado' : 'Copiar'
                 }
             </Button>
         </div>

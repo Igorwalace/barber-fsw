@@ -18,12 +18,14 @@ const Popular = async () => {
                 <Title title={`Populares`} />
                 <div className='flex gap-3 justify-between items-center pt-3 overflow-x-scroll scrollbar-none' >
                     {
-                        barbershop.slice(0, 5).map((barber) => (
-                            <BarbershopItem key={barber.id} barbershop={barber} />
-                        ))
+                        barbershop
+                            .slice(3, 10)
+                            .map((barber) => (
+                                <BarbershopItem key={barber.id} barbershop={barber} />
+                            ))
                     }
                     <Button_Arrow />
-                    </div>
+                </div>
             </main>
         </>
     )

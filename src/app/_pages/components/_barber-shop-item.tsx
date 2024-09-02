@@ -18,7 +18,7 @@ const BarbershopItem = ({ barbershop }: BarbershopItemProps) => {
     return (
         <>
             <main className='w-[165px] lg:w-56 min-h-60 bg-card rounded-2xl border-2 border-[#26272B]' >
-                <div className='relative lg:h-[159px] h-[120px] w-full' >
+                <div className='relative lg:h-[159px] h-[120px] lg:w-[213px] w-[159px]' >
                     <Image
                         src={barbershop.imageUrl}
                         fill

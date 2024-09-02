@@ -18,7 +18,7 @@ const More_Visits = async () => {
                 <Title title={`Mais Visitados`} />
                 <div className='flex gap-3 justify-between items-center pt-3 overflow-x-scroll scrollbar-none' >
                     {
-                        barbershop.slice(0, 5).map((barber) => (
+                        barbershop.slice(0, 6).map((barber) => (
                             <BarbershopItem key={barber.id} barbershop={barber} />
                         ))
                     }

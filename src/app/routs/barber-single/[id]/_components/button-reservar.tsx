@@ -108,7 +108,7 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
             if (!day) return
             const bookings = await GETBookings({
                 date: day,
-                serviceId: barberservice.id,
+                barbershopId: barberservice.barbershopId
             })
             setDayBookings(bookings)
         }
@@ -159,7 +159,8 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
         await CreateBooking({
             serviceId: barberservice.id,
             userId: session?.user?.id,
-            date: newDate
+            date: newDate,
+            barbershopId: barberservice.barbershopId
         })
         setLoadingBooking(false)
         toast({
