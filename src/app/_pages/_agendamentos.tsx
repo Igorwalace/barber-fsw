@@ -34,7 +34,7 @@ const Agendamentos = async () => {
                         {
                             bookings
                                 .map((booking) => (
-                                    <div key={booking.id} className='min-w-[350px] border-2 border-card bg-[#26272B] p-3 rounded-xl flex items-center justify-between w-full' >
+                                    <div key={booking.id} className='min-w-[80%] border-2 border-card bg-[#26272B] p-3 rounded-xl flex items-center justify-between w-full' >
                                         <div className='w-[70%] space-y-2 border-r-2 border-card' >
                                             <span className='text-primary text-xs bg-[#221C3D] px-[8px] py-[2px] rounded-xl' >Confirmado</span>
                                             <h1 className='text-base font-extrabold' >{booking.service.name}</h1>
