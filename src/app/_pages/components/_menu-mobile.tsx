@@ -33,6 +33,7 @@ const Menu_Mobile = ({ session }: any) => {
     const { openSheetMenu, setOpenSheetMenu, setOpenDialogLogado, setOpenDialogLogin  } = useAppUtils()
 
     const handleSignout = () => setOpenDialogLogado(true)
+    const handleSheetClose = () => setOpenSheetMenu(false)
 
     return (
         <>
@@ -67,13 +68,13 @@ const Menu_Mobile = ({ session }: any) => {
                             <Separator className='my-3' />
 
                             <div className='flex flex-col gap-3' >
-                                <Button variant='ghost' className='justify-start items-center bg-primary px-3 py-3' asChild >
+                                <Button onClick={handleSheetClose} variant='ghost' className='justify-start items-center bg-primary px-3 py-3' asChild >
                                     <Link href='/' className='text-white flex gap-4 ' >
                                         <FaHome size={18} />
                                         <span className='text-sm' >Ínicio</span>
                                     </Link>
                                 </Button>
-                                <Button variant='ghost' className='justify-start items-center bg- px-3 py-3' asChild >
+                                <Button onClick={handleSheetClose} variant='ghost' className='justify-start items-center bg- px-3 py-3' asChild >
                                     <Link href='/' className='text-white flex gap-4 ' >
                                         <FaCalendarAlt size={18} />
                                         <span className='text-sm' >Agendamento</span>

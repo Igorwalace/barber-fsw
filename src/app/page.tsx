@@ -10,6 +10,7 @@ import Re_Banner from './_pages/_recomendados-banner'
 import More_Visits from './_pages/_more-visits'
 import Footer from './_pages/_footer'
 import Categorys from './_pages/_categorys'
+import Agendamentos from './_pages/_agendamentos'
 
 const Page = () => {
   return (
@@ -29,7 +30,8 @@ const Page = () => {
           />
         </div>
       </div>
-      
+
+      <div className='block lg:hidden' ><Agendamentos /></div>
       <div className='block lg:hidden' ><Re_Banner /></div>
       <Popular />
       <More_Visits />

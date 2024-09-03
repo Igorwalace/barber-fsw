@@ -14,11 +14,11 @@ const Re_Banner = async () => {
         <>
             <main className='lg:px-0 lg:py-0 pt-5 px-5 relative' >
                 <div>
-                    <h1 className='uppercase text-sm' >Recomendados</h1>
+                    <h1 className='capitalize text-sm' >Recomendado</h1>
                 </div>
                 <div className='flex gap-3 mt-5 overflow-x-auto scrollbar-none' >
                     {
-                        barbershop.slice(0, 3).map((barber) => (
+                        barbershop.slice(5, 6).map((barber) => (
                             <BarbershopItem key={barber.id} barbershop={barber} />
                         ))
                     }
