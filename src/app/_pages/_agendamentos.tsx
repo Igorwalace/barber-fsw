@@ -12,6 +12,8 @@ const Agendamentos = async () => {
 
     const session = await auth()
 
+    // const userbookings = await prisma.
+
     const bookings = await prisma.booking.findMany({
         where: {
             userId: session?.user?.id
@@ -25,7 +27,7 @@ const Agendamentos = async () => {
     return (
         <>
             {
-                session?.user &&
+                session?.user && bookings.length > 0 &&
                 <main className='lg:px-0 lg:py-0 pt-5 px-5 relative' >
                     <div className='pb-3' >
                         <h1 className='capitalize text-sm' >Agendamentos</h1>
