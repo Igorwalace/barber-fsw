@@ -37,8 +37,8 @@ const Agendamentos = async () => {
                             bookings
                                 .map((booking) => (
                                     <>
-                                        <div key={booking.id} className='min-w-[80%] border-2 border-card bg-[#26272B] p-3 rounded-xl flex items-center justify-between' >
-                                            <div className='w-[60%] space-y-2 border-r-2 border-card' >
+                                        <div key={booking.id} className='min-w-[90%] border-2 border-card bg-[#26272B] p-3 rounded-xl flex items-center justify-between' >
+                                            <div className='w-[65%] space-y-2 border-r-2 border-card' >
                                                 <span className='text-primary text-xs bg-[#221C3D] px-[8px] py-[2px] rounded-xl' >Confirmado</span>
                                                 <h1 className='text-base font-extrabold' >{booking.service.name}</h1>
                                                 <div className='flex items-center gap-3' >
@@ -48,7 +48,7 @@ const Agendamentos = async () => {
                                                     <span className='text-sm' >{booking.barbershop.name}</span>
                                                 </div>
                                             </div>
-                                            <div className='w-[40%] flex items-center justify-center flex-col' >
+                                            <div className='w-[45%] flex items-center justify-center flex-col' >
                                                 <span className='text-sm capitalize font-normal' >
                                                     {format(booking.date, "MMMM", {
                                                         locale: ptBR
