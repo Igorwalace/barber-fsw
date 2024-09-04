@@ -7,6 +7,7 @@ import { Avatar, AvatarImage } from "../_services/components/ui/avatar";
 //prisma
 import { prisma } from "../_services/prisma/_prisma";
 import { ptBR } from "date-fns/locale";
+import CancelarBooking from "./_cancelar-booking";
 
 const Agendamentos = async () => {
 
@@ -37,9 +38,12 @@ const Agendamentos = async () => {
                             bookings
                                 .map((booking) => (
                                     <>
-                                        <div key={booking.id} className='min-w-[90%] border-2 border-card bg-[#26272B] p-3 rounded-xl flex items-center justify-between' >
-                                            <div className='w-[65%] space-y-2 border-r-2 border-card' >
-                                                <span className='text-primary text-xs bg-[#221C3D] px-[8px] py-[2px] rounded-xl' >Confirmado</span>
+                                        <div key={booking.id} className='lg:min-w-[80%] min-w-[90%] border-2 border-card bg-[#26272B] p-3 rounded-xl flex items-center justify-between' >
+                                            <div className='lg:w-[70%] w-[65%] space-y-2 border-r-2 border-card' >
+                                                <div className="flex justify-between items-center pr-3">
+                                                    <span className='text-primary text-xs bg-[#221C3D] px-[8px] py-[2px] rounded-xl' >Confirmado</span>
+                                                    <CancelarBooking booking={booking} />
+                                                </div>
                                                 <h1 className='text-base font-extrabold' >{booking.service.name}</h1>
                                                 <div className='flex items-center gap-3' >
                                                     <Avatar className='w-6 h-6' >
@@ -48,7 +52,7 @@ const Agendamentos = async () => {
                                                     <span className='text-sm' >{booking.barbershop.name}</span>
                                                 </div>
                                             </div>
-                                            <div className='w-[45%] flex items-center justify-center flex-col' >
+                                            <div className='lg:w-[30%] w-[35%] flex items-center justify-center flex-col' >
                                                 <span className='text-sm capitalize font-normal' >
                                                     {format(booking.date, "MMMM", {
                                                         locale: ptBR
