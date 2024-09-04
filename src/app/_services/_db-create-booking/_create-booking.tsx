@@ -1,5 +1,9 @@
 'use server'
 
+//next-react
+import { revalidatePath } from "next/cache"
+
+//prisma
 import { prisma } from "../prisma/_prisma"
 
 interface CreateBookingParams {
@@ -18,4 +22,6 @@ export const CreateBooking = async ({ serviceId, userId, date, barbershopId }: C
             barbershopId: barbershopId
         }
     })
+    revalidatePath("/routs/barber-single/[id]")
+    revalidatePath("/")
 }

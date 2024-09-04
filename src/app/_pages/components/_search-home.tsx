@@ -30,7 +30,7 @@ const Search_Home = async () => {
 
             }
             <h1 className='lg:text-base text-sm font-light'>{dayCurrent}, {date.getDate()} de <span className='capitalize' >{date.toLocaleString('pt-BR', { month: 'long' })}.</span></h1>
-            <div className='flex lg:mt-10 mt-5 gap-1 lg:max-w-80' >
+            <div className='flex lg:my-10 mt-5 gap-1 lg:max-w-80' >
                 <Input type="email" placeholder="Buscar Barbearias" />
                 <Button variant="outline" size="icon" className='bg-[#8162FF] px-2'>
                     <CiSearch size={20} className='font-extrabold' />
