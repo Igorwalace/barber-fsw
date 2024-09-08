@@ -17,7 +17,6 @@ import { GetConfirmedBookings } from "../_services/_data/get-booking-confirmed";
 const AboutBooking = async () => {
 
     const session = await GetSession()
-
     const bookings = await GetConfirmedBookings()
 
     return (

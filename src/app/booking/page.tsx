@@ -15,6 +15,8 @@ import { GetSession } from "../_services/_data/get-session";
 const Booking = async () => {
 
     const session = await GetSession()
+    if(!session?.user) redirect('/')
+    
 
     return (
         <>
