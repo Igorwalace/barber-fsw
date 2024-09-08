@@ -75,7 +75,7 @@ const Menu_Mobile = ({ session }: any) => {
                                     </Link>
                                 </Button>
                                 <Button onClick={handleSheetClose} variant='ghost' className='justify-start items-center bg- px-3 py-3' asChild >
-                                    <Link href='/' className='text-white flex gap-4 ' >
+                                    <Link href='/booking' className='text-white flex gap-4 ' >
                                         <FaCalendarAlt size={18} />
                                         <span className='text-sm' >Agendamento</span>
                                     </Link>

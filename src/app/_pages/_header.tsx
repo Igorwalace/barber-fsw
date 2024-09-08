@@ -1,5 +1,6 @@
 //react-next
 import { auth } from '../_services/auth/auth'
+import Link from 'next/link'
 import React from 'react'
 
 //shadcn
@@ -16,16 +17,24 @@ import Perfil_Login from './components/_perfil-login'
 import Perfil_Logado from './components/_perfil-logado'
 import Menu_Mobile from './components/_menu-mobile'
 
+//db
+import { GetSession } from '../_services/_data/get-session'
+
 const Header = async () => {
 
-    const session = await auth()
+    const session = await GetSession()
 
     return (
         <div className='lg:px-10 px-5 py-5 border-b-2 border-separate' >
             <nav className='flex justify-between items-center' >
                 <Logo />
                 <div className='lg:flex hidden justify-center items-center gap-3' >
-                    <Button variant="ghost" className='text-sm flex gap-1'><span><FaRegCalendarAlt /></span>Agendamentos</Button>
+                    <Button asChild variant="ghost" className='text-sm flex gap-1'>
+                        <Link href='/booking' >
+                            <span><FaRegCalendarAlt /></span>
+                            Agendamentos
+                        </Link>
+                    </Button>
                     {
                         session?.user
                             ?

@@ -34,6 +34,7 @@ const Phone_Item = ({ phone }: PhoneProps) => {
 
             <Button
                 variant="secondary"
+                className='bg-[#26272B]'
                 disabled={copied}
                 size="sm"
                 onClick={() => handleCopyPhoneClick(phone)}

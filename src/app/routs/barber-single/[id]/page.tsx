@@ -18,6 +18,7 @@ import Below_Img from './_components/below-img'
 import Menu_Barber from './_components/menu-barber-single'
 import Footer from '@/app/_pages/_footer'
 import Button_Reservar from './_components/button-reservar'
+import Map from '@/app/_components-g/_map'
 
 //shadcn
 import { Separator } from '@/app/_services/components/ui/separator'
@@ -104,30 +105,7 @@ const Page = async ({ params }: BaberSingleProps) => {
                 </div>
                 <div className='w-[386px] max-h-[700px] lg:block hidden bg-card p-3 space-y-3 rounded-lg' >
 
-                    <div className='relative w-full h-[180px]' >
-                        <Image
-                            className='rounded-lg'
-                            fill
-                            quality={100}
-                            alt='map'
-                            src='/map.png'
-                        />
-                        <div className='px-5 py-3 bg-popover absolute rounded-lg bottom-3 right-3 left-3 flex gap-4' >
-                            <div className='relative w-12 h-12' >
-                                <Image
-                                    className='rounded-full'
-                                    alt={barbersingle.name}
-                                    fill
-                                    src={barbersingle.imageUrl}
-                                />
-                            </div>
-                            <div>
-                                <h1 className='text-base' >{barbersingle.name}</h1>
-                                <h1 className='text-xs' >{barbersingle.address}</h1>
-                            </div>
-                        </div>
-                    </div>
-
+                    <Map barbersingle={barbersingle} />
 
                     <About barbersingle={barbersingle} />
 
