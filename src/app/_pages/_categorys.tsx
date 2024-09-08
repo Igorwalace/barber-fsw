@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 //shadcn
 import { Button } from '../_services/components/ui/button'
@@ -9,21 +10,16 @@ import { AiFillCalendar } from 'react-icons/ai'
 interface InterfaceCategory {
     name: string,
     icon: any
+    link: string
 }
 
 const Categorys = () => {
 
     const categorys = [
+
         {
-            name: 'Cabelo',
-            icon: <FaScissors />
-        },
-        {
-            name: 'Barba',
-            icon: <GiBeard />
-        },
-        {
-            name: 'Acabamento',
+            name: 'Agendamentos',
+            link: '/booking',
             icon: <AiFillCalendar />
         }
     ]
@@ -34,7 +30,11 @@ const Categorys = () => {
                 {
                     categorys.map((categorys: InterfaceCategory) => (
                         <div key={categorys.name}>
-                            <Button className='rounded-3xl text-sm' variant='secondary' ><span className='pr-2' >{categorys.icon}</span>{categorys.name}</Button>
+                            <Button className='rounded-3xl text-sm' variant='secondary' >
+                                <Link href={categorys.link} >
+                                    <span className='pr-2' >{categorys.icon}</span>{categorys.name}
+                                </Link>
+                            </Button>
                         </div>
                     ))
                 }

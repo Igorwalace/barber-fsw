@@ -14,7 +14,7 @@ const Arrow_Back = () => {
     const router = useRouter()
 
     const handleButtonBack = () => {
-        router.back()
+        router.push('/')
     }
 
     return (

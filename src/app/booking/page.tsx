@@ -2,6 +2,7 @@ import Footer from "../_pages/_footer";
 import Header from "../_pages/_header";
 
 //next-react
+import { redirect } from "next/navigation";
 
 //prisma
 
@@ -14,6 +15,10 @@ import { GetSession } from "../_services/_data/get-session";
 const Booking = async () => {
 
     const session = await GetSession()
+    if (!session?.user) {
+        redirect('/')
+        return
+    }
 
     return (
         <>
