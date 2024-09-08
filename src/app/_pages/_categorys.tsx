@@ -31,7 +31,7 @@ const Categorys = () => {
                     categorys.map((categorys: InterfaceCategory) => (
                         <div key={categorys.name}>
                             <Button className='rounded-3xl text-sm' variant='secondary' >
-                                <Link href={categorys.link} className='flex gap-2 justify-center items-center' >
+                                <Link href={categorys.link} className='flex gap-1 justify-center items-center' >
                                     <span className='pr-2' >{categorys.icon}</span>{categorys.name}
                                 </Link>
                             </Button>
