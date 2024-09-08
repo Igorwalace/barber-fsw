@@ -29,12 +29,22 @@ const Header = async () => {
             <nav className='flex justify-between items-center' >
                 <Logo />
                 <div className='lg:flex hidden justify-center items-center gap-3' >
-                    <Button asChild variant="ghost" className='text-sm flex gap-1'>
-                        <Link href='/booking' >
+                    {
+                        session?.user &&
+                        <Button asChild variant="ghost" className='text-sm flex gap-1'>
+                            <Link href='/booking' >
+                                <span><FaRegCalendarAlt /></span>
+                                Agendamentos
+                            </Link>
+                        </Button>
+                    }
+                    {
+                        !session?.user &&
+                        <Button disabled variant="ghost" className='text-sm flex gap-1'>
                             <span><FaRegCalendarAlt /></span>
                             Agendamentos
-                        </Link>
-                    </Button>
+                        </Button>
+                    }
                     {
                         session?.user
                             ?

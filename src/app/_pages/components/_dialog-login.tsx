@@ -45,8 +45,8 @@ const Dialog_Login = () => {
             <Dialog open={openDialogLogin} onOpenChange={setOpenDialogLogin} >
                 <DialogContent className='w-[90%] rounded-lg' >
                     <DialogHeader>
-                        <DialogTitle>Faça login na plataforma</DialogTitle>
-                        <DialogDescription>
+                        <DialogTitle className='text-left' >Faça login na plataforma</DialogTitle>
+                        <DialogDescription className='text-left' >
                             Conecte-se usando sua conta do Google.
                         </DialogDescription>
                         <DialogDescription className='pt-2 w-full' >

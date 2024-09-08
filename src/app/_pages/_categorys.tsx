@@ -3,9 +3,8 @@ import Link from 'next/link'
 
 //shadcn
 import { Button } from '../_services/components/ui/button'
-import { FaScissors } from 'react-icons/fa6'
-import { GiBeard } from 'react-icons/gi'
 import { AiFillCalendar } from 'react-icons/ai'
+import { GetSession } from '../_services/_data/get-session'
 
 interface InterfaceCategory {
     name: string,
@@ -13,8 +12,9 @@ interface InterfaceCategory {
     link: string
 }
 
-const Categorys = () => {
+const Categorys = async () => {
 
+    const session = await GetSession()
     const categorys = [
 
         {
@@ -30,8 +30,8 @@ const Categorys = () => {
                 {
                     categorys.map((categorys: InterfaceCategory) => (
                         <div key={categorys.name}>
-                            <Button className='rounded-3xl text-sm' variant='secondary' >
-                                <Link href={categorys.link} className='flex gap-1 justify-center items-center' >
+                            <Button disabled={!session?.user} className='rounded-3xl text-sm' variant='secondary' >
+                                <Link href={categorys.link} className='flex justify-center items-center' >
                                     <span className='pr-2' >{categorys.icon}</span>{categorys.name}
                                 </Link>
                             </Button>

@@ -18,6 +18,7 @@ import { Separator } from "@/app/_services/components/ui/separator";
 import { Avatar, AvatarImage } from "@/app/_services/components/ui/avatar";
 
 //react-next
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -30,7 +31,9 @@ import useAppUtils from "@/app/_contexts/utils";
 
 const Menu_Mobile = ({ session }: any) => {
 
-    const { openSheetMenu, setOpenSheetMenu, setOpenDialogLogado, setOpenDialogLogin  } = useAppUtils()
+    const pathname = usePathname()
+
+    const { openSheetMenu, setOpenSheetMenu, setOpenDialogLogado, setOpenDialogLogin } = useAppUtils()
 
     const handleSignout = () => setOpenDialogLogado(true)
     const handleSheetClose = () => setOpenSheetMenu(false)
@@ -68,18 +71,27 @@ const Menu_Mobile = ({ session }: any) => {
                             <Separator className='my-3' />
 
                             <div className='flex flex-col gap-3' >
-                                <Button onClick={handleSheetClose} variant='ghost' className='justify-start items-center bg-primary px-3 py-3' asChild >
+                                <Button onClick={handleSheetClose} variant='ghost' className={`${pathname === '/' && 'bg-primary'} justify-start items-center px-3 py-3`} asChild >
                                     <Link href='/' className='text-white flex gap-4 ' >
                                         <FaHome size={18} />
                                         <span className='text-sm' >Ínicio</span>
                                     </Link>
                                 </Button>
-                                <Button onClick={handleSheetClose} variant='ghost' className='justify-start items-center bg- px-3 py-3' asChild >
-                                    <Link href='/booking' className='text-white flex gap-4 ' >
-                                        <FaCalendarAlt size={18} />
-                                        <span className='text-sm' >Agendamento</span>
-                                    </Link>
-                                </Button>
+                                {
+                                    session?.user
+                                        ?
+                                        <Button onClick={handleSheetClose} variant='ghost' className={`${pathname === '/booking' && 'bg-primary'} justify-start items-center px-3 py-3`} asChild >
+                                            <Link href='/booking' className='text-white flex gap-4 ' >
+                                                <FaCalendarAlt size={18} />
+                                                <span className='text-sm' >Agendamentos</span>
+                                            </Link>
+                                        </Button>
+                                        :
+                                        <Button onClick={handleSheetClose} disabled={!session?.user} variant='ghost' className={`${pathname === '/booking' && 'bg-primary'} justify-start items-center px-3 py-3 text-white flex gap-4 `} >
+                                            <FaCalendarAlt size={18} />
+                                            <span className='text-sm' >Agendamentos</span>
+                                        </Button>
+                                }
                             </div>
 
                             <Separator className='my-3' />
@@ -87,7 +99,7 @@ const Menu_Mobile = ({ session }: any) => {
                             <div className='flex flex-col gap-4' >
                                 {
                                     quickSearchOptions.map((item) => (
-                                        <Button variant='ghost' key={item.imageUrl} className='py-1 px-3 justify-start items-center' asChild >
+                                        <Button onClick={handleSheetClose} variant='ghost' key={item.imageUrl} className='py-1 px-3 justify-start items-center' asChild >
                                             <Link href='/' className="text-white flex gap-4 items-center" >
                                                 <Image
                                                     src={item.imageUrl}
@@ -102,17 +114,19 @@ const Menu_Mobile = ({ session }: any) => {
                                 }
                             </div>
 
-                            <Separator className='my-3' />
 
                             {
                                 session
                                 &&
-                                <SheetClose className='w-full' >
-                                    <Button variant='ghost' onClick={handleSignout} className='w-full justify-start flex gap-4 items-center px-3 text-white' >
-                                        <IoExitOutline size={18} />
-                                        <span className='text-sm' >Sair da conta</span>
-                                    </Button>
-                                </SheetClose>
+                                <>
+                                    <Separator className='my-3' />
+                                    <SheetClose className='w-full' >
+                                        <Button variant='ghost' onClick={handleSignout} className='w-full justify-start flex gap-4 items-center px-3 text-white' >
+                                            <IoExitOutline size={18} />
+                                            <span className='text-sm' >Sair da conta</span>
+                                        </Button>
+                                    </SheetClose>
+                                </>
                             }
 
                         </SheetDescription>

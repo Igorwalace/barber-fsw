@@ -48,8 +48,8 @@ const Perfil_Logado = ({ session }: any) => {
             <Dialog open={openDialogLogado} onOpenChange={setOpenDialogLogado} >
                 <DialogContent className='w-[90%] rounded-lg' >
                     <DialogHeader>
-                        <DialogTitle>Sair</DialogTitle>
-                        <DialogDescription>
+                        <DialogTitle className='text-left' >Sair</DialogTitle>
+                        <DialogDescription className='text-left' >
                             Deseja sair da plataforma?
                         </DialogDescription>
                         <DialogDescription className='pt-2 w-full flex gap-2' >
