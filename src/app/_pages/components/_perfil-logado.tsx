@@ -14,6 +14,7 @@ import {
 //react-next
 import { useState } from "react";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 //contexts
 import useAppUtils from "@/app/_contexts/utils";
@@ -21,6 +22,7 @@ import useAppUtils from "@/app/_contexts/utils";
 const Perfil_Logado = ({ session }: any) => {
 
     const { openDialogLogado, setOpenDialogLogado } = useAppUtils()
+    const router = useRouter()
     
     const [loadingSignout, setLoadingSignout] = useState(false)
 
@@ -28,6 +30,7 @@ const Perfil_Logado = ({ session }: any) => {
         setLoadingSignout(true)
         try {
             await signOut()
+            router.push('/')
         } catch (error) {
             console.log(error)
         } finally {
