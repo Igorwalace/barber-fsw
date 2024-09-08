@@ -43,7 +43,7 @@ const Booking = async () => {
                             </div>
                         </div>
                         :
-                        <div className='flex justify-center items-center lg:py-10 py-6' >
+                        <div className='flex justify-center items-center min-h-[calc(100dvh-68px-82px)]' >
                             <h1 className='text-sm' >Faça login para conferir suas reservas.</h1>
                         </div>
                 }
