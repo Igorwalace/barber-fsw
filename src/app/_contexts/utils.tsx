@@ -1,8 +1,5 @@
 'use client'
 
-//prisma
-import { Booking } from "@prisma/client";
-
 //next-react
 import { createContext, useContext, useState } from "react"
 
@@ -15,6 +12,7 @@ export function AppUtils({ children }: {
     const [openDialogLogado, setOpenDialogLogado] = useState(false)
     const [openDialogLogin, setOpenDialogLogin] = useState(false)
     const [dialogLoginFinally, setDialogLoginFinally] = useState(false)
+    const [openDialogConfirmedBooking, setOpenDialogConfirmedBooking] = useState(false)
 
     return (
         <AppContext.Provider value={{
@@ -25,7 +23,9 @@ export function AppUtils({ children }: {
             openDialogLogin,
             setOpenDialogLogin,
             dialogLoginFinally,
-            setDialogLoginFinally
+            setDialogLoginFinally,
+            openDialogConfirmedBooking,
+            setOpenDialogConfirmedBooking
         }} >
             {children}
         </AppContext.Provider>

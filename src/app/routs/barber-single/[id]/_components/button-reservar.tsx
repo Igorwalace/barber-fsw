@@ -33,6 +33,10 @@ import { GETBookings } from './get-bookings';
 import { useRouter } from 'next/navigation';
 import { Checkbookings } from './check-bookings';
 
+//contexts
+import useAppUtils from '@/app/_contexts/utils';
+import DialogConfirmedBooking from './_dialog-confirmed-booking';
+
 interface BarberServiceProps {
     barberservice: BarbershopService
     barbershop: Pick<Barbershop, 'name'>
@@ -102,6 +106,8 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
 
     const [dayBookings, setDayBookings] = useState<Booking[]>([])
     const [bookingSheetIsOpen, setBookingSheetIsOpen] = useState(false)
+
+    const { openDialogConfirmedBooking, setOpenDialogConfirmedBooking } = useAppUtils()
 
     useEffect(() => {
         const fetch = async () => {
@@ -177,11 +183,12 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
             barbershopId: barberservice.barbershopId
         })
         setLoadingBooking(false)
-        toast({
-            style: { backgroundColor: 'white', color: 'black', border: 'none' },
-            title: "Concluído",
-            description: "Reserva concluída com sucesso!",
-        })
+        // toast({
+        //     style: { backgroundColor: 'white', color: 'black', border: 'none' },
+        //     title: "Concluído",
+        //     description: "Reserva concluída com sucesso!",
+        // })
+        setOpenDialogConfirmedBooking(true)
         setselectedTime('')
         setday(undefined)
         setOpenReserve(false)
@@ -190,7 +197,6 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
     return (
         <>
             <Button onClick={() => handleReserve(barberservice.id)} variant='secondary' >Reservar</Button>
-
             <Sheet open={openReserve} onOpenChange={setOpenReserve} >
                 <SheetContent className='overflow-y-auto [&::-webkit-scrollbar]:hidden w-[90%]' >
                     <SheetHeader>

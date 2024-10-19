@@ -22,6 +22,7 @@ import Map from '@/app/_components-g/_map'
 
 //shadcn
 import { Separator } from '@/app/_services/components/ui/separator'
+import DialogConfirmedBooking from './_components/_dialog-confirmed-booking'
 
 interface BaberSingleProps {
     params: {
@@ -126,6 +127,7 @@ const Page = async ({ params }: BaberSingleProps) => {
 
                 </div>
             </div>
+            <DialogConfirmedBooking />
             <Footer />
         </>
     )
