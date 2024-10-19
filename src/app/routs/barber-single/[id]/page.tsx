@@ -23,6 +23,7 @@ import Map from '@/app/_components-g/_map'
 //shadcn
 import { Separator } from '@/app/_services/components/ui/separator'
 import DialogConfirmedBooking from './_components/_dialog-confirmed-booking'
+import DaysWeekPage from './_components/days-week'
 
 interface BaberSingleProps {
     params: {
@@ -52,7 +53,7 @@ const Page = async ({ params }: BaberSingleProps) => {
     return (
         <>
             <div className="lg:block hidden"><Header /></div>
-            <div className='lg:px-10 lg:py-5 flex justify-center gap-10' >
+            <div className='lg:px-10 lg:py-5 flex justify-center gap-10 h-auto w-full   ' >
                 <div className='lg:w-auto w-full' >
                     <div className='relative w-full lg:w-[750px] h-[250px] lg:h-[487px]' >
                         <Image
@@ -104,7 +105,7 @@ const Page = async ({ params }: BaberSingleProps) => {
                     </div>
 
                 </div>
-                <div className='w-[386px] max-h-[700px] lg:block hidden bg-card p-3 space-y-3 rounded-lg' >
+                <div className='w-[386px] max-h-[950px] lg:block hidden bg-card p-3 space-y-3 rounded-lg' >
 
                     <Map barbersingle={barbersingle} />
 
@@ -117,6 +118,10 @@ const Page = async ({ params }: BaberSingleProps) => {
                             <Phone_Item key={phone} phone={phone} />
                         ))}
                     </div>
+
+                    <Separator className='h-[2px]' />
+
+                    <DaysWeekPage />
 
                     <Separator className='h-[2px]' />
 
