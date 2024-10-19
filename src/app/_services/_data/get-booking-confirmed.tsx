@@ -21,8 +21,7 @@ export const GetConfirmedBookings = async () => {
                 include: {
                     barbershop: true,
                 },
-            },
-            barbershop: true
+            }
         },
         orderBy: {
             date: "asc",

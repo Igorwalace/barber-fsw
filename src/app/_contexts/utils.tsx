@@ -1,4 +1,9 @@
 'use client'
+
+//prisma
+import { Booking } from "@prisma/client";
+
+//next-react
 import { createContext, useContext, useState } from "react"
 
 export const AppContext = createContext<any>(undefined);

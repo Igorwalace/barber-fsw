@@ -7,6 +7,11 @@ import { Button } from '../_services/components/ui/button'
 import { IoIosArrowForward } from 'react-icons/io'
 
 const Button_Arrow = () => {
+
+    const handleScroll = () => {
+
+    }
+
     return (
         <Button variant='outline' size='icon' className='absolute top-[50%] lg:right-5 right-3 z-10 border-2 border-accent rounded-full' ><IoIosArrowForward /></Button>
     )

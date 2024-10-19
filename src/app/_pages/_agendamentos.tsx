@@ -16,7 +16,7 @@ const Agendamentos = async () => {
     return (
         <>
             {
-                session?.user && bookingsConfirmed.length > 0 &&
+                session?.user && bookingsConcluded.length > 0 &&
                 <main className='lg:px-0 lg:py-0 pt-5 px-5 relative' >
                     <div className='pb-3' >
                         <h1 className='capitalize text-sm' >Agendamentos</h1>
