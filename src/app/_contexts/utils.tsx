@@ -25,7 +25,7 @@ export function AppUtils({ children }: {
             dialogLoginFinally,
             setDialogLoginFinally,
             openDialogConfirmedBooking,
-            setOpenDialogConfirmedBooking
+            setOpenDialogConfirmedBooking,
         }} >
             {children}
         </AppContext.Provider>

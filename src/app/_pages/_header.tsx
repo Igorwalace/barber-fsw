@@ -1,5 +1,4 @@
 //react-next
-import { auth } from '../_services/auth/auth'
 import Link from 'next/link'
 import React from 'react'
 
@@ -20,6 +19,9 @@ import Menu_Mobile from './components/_menu-mobile'
 //db
 import { GetSession } from '../_services/_data/get-session'
 
+//pages
+import SerachHeader from './_search-header'
+
 const Header = async () => {
 
     const session = await GetSession()
@@ -28,6 +30,7 @@ const Header = async () => {
         <div className='lg:px-10 px-5 py-5 border-b-2 border-separate' >
             <nav className='flex justify-between items-center' >
                 <Logo />
+                <SerachHeader />
                 <div className='lg:flex hidden justify-center items-center gap-3' >
                     {
                         session?.user &&

@@ -13,8 +13,8 @@ import BookingsConfirmed from "./components-bookings/bookings-confirmed";
 const Bookings = async () => {
 
     const bookings = await GetConfirmedBookings()
-    const session = await GetSession()
 
+    const session = await GetSession()
     if(!session?.user) redirect('/')
 
     return (
