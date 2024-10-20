@@ -1,9 +1,9 @@
-interface DaysWeek {
+interface DaysStatus {
     day: string
     status: string
 }
 
-export const DaysWeek: DaysWeek[] = [
+export const DaysStatus: DaysStatus[] = [
     {
         day: "Segunda",
         status: "Fechado",

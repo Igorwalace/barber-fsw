@@ -19,11 +19,11 @@ import Menu_Barber from './_components/menu-barber-single'
 import Footer from '@/app/_pages/_footer'
 import Button_Reservar from './_components/button-reservar'
 import Map from '@/app/_components-g/_map'
+import DaysStatusPage from './_components/days-status'
+import DialogConfirmedBooking from './_components/_dialog-confirmed-booking'
 
 //shadcn
 import { Separator } from '@/app/_services/components/ui/separator'
-import DialogConfirmedBooking from './_components/_dialog-confirmed-booking'
-import DaysWeekPage from './_components/days-week'
 
 interface BaberSingleProps {
     params: {
@@ -121,7 +121,7 @@ const Page = async ({ params }: BaberSingleProps) => {
 
                     <Separator className='h-[2px]' />
 
-                    <DaysWeekPage />
+                    <DaysStatusPage />
 
                     <Separator className='h-[2px]' />
 

@@ -1,13 +1,21 @@
+//react-next
+import { redirect } from "next/navigation";
 import Footer from "../_pages/_footer";
 import Header from "../_pages/_header";
 
-//functios
+//functins
 import { GetConfirmedBookings } from "../_services/_data/get-booking-confirmed";
+import { GetSession } from "../_services/_data/get-session";
+
+//pages
 import BookingsConfirmed from "./components-bookings/bookings-confirmed";
 
 const Bookings = async () => {
 
     const bookings = await GetConfirmedBookings()
+    const session = await GetSession()
+
+    if(!session?.user) redirect('/')
 
     return (
         <>

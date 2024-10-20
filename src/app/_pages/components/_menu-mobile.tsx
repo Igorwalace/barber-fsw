@@ -23,7 +23,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 //pages
-import { quickSearchOptions } from "@/app/_constants/_search";
+import { quickSearchOptions } from "@/app/_constants/_search-constant";
 import Dialog_Login from "./_dialog-login";
 
 //contexts
