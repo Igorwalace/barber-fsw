@@ -1,7 +1,7 @@
 'use client'
 //react-icons
 import { IoExitOutline } from "react-icons/io5";
-import { FiMenu } from "react-icons/fi";
+import { FiMenu, FiSearch } from "react-icons/fi";
 import { FaHome, FaCalendarAlt } from "react-icons/fa";
 
 //shadcn
@@ -42,7 +42,7 @@ const Menu_Mobile = ({ session }: any) => {
         <>
             <Button variant="link" size="icon" onClick={() => setOpenSheetMenu(true)} ><FiMenu color='white' size={20} /></Button>
             <Sheet open={openSheetMenu} onOpenChange={setOpenSheetMenu} >
-                <SheetContent>
+                <SheetContent className='overflow-y-auto scrollbar-none' >
                     <SheetHeader>
                         <SheetTitle className='flex justify-start' >Menu</SheetTitle>
                         <SheetDescription>
@@ -92,6 +92,12 @@ const Menu_Mobile = ({ session }: any) => {
                                             <span className='text-sm' >Agendamentos</span>
                                         </Button>
                                 }
+                                <Button onClick={handleSheetClose} variant='ghost' className={`${pathname.includes('/search') && 'bg-primary'} justify-start items-center px-3 py-3`} asChild >
+                                    <Link href={`/search/Barbearia`} className='text-white flex gap-4 ' >
+                                        <FiSearch size={18} />
+                                        <span className='text-sm' >Busca</span>
+                                    </Link>
+                                </Button>
                             </div>
 
                             <Separator className='my-3' />

@@ -2,6 +2,7 @@
 //shadcn
 import { Button } from "@/app/_services/components/ui/button";
 import { Input } from "@/app/_services/components/ui/input";
+import { useToast } from "@/app/_services/components/ui/use-toast";
 
 //react-next
 import Link from "next/link";
@@ -15,9 +16,17 @@ const FormSearch = () => {
 
     const [text, setText] = useState('')
     const router = useRouter()
+    const { toast } = useToast()
 
     const searchParams = (e: any) => {
         e.preventDefault()
+        if (text.trim() === '') {
+            toast({
+                title: "Calma ai!",
+                description: "Digite algo primeiro.",
+            })
+            return
+        }
         router.push(`/search/${text}`)
     }
 
@@ -31,10 +40,8 @@ const FormSearch = () => {
                     className='outline-none'
                     placeholder="Buscar Barbearias"
                 />
-                <Button asChild variant="outline" size="icon" className='bg-[#8162FF] px-2'>
-                    <Link href={`/search/${text}`} >
-                        <CiSearch size={20} className='font-extrabold' />
-                    </Link>
+                <Button variant="outline" size="icon" className='bg-[#8162FF] px-2'>
+                    <CiSearch size={20} className='font-extrabold' />
                 </Button>
             </form>
         </>
