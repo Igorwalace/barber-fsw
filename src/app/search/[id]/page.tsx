@@ -30,7 +30,7 @@ const Page = async ({ params }: PropsId) => {
                     <div className="flex items-center flex-wrap gap-2" >
                         {
                             barbershop
-                                .filter((barber) => barber.name.includes(decodeURIComponent(params.id)))
+                                .filter((barber) => barber.name.toLowerCase().includes(decodeURIComponent(params.id)))
                                 .map((barber) => (
                                     <BarbershopItem key={barber.id} barbershop={barber} />
                                 ))

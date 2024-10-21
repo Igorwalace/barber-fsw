@@ -38,7 +38,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
                         </span>
                         {/* <CancelarBooking booking={booking} /> */}
                     </div>
-                    <h1 className='text-base font-extrabold' >{booking.service.name}</h1>
+                    <h1 className='text-base text-left font-extrabold' >{booking.service.name}</h1>
                     <div className='flex items-center gap-3' >
                         <Avatar className='w-6 h-6' >
                             <AvatarImage src={booking.service.barbershop.imageUrl} />
