@@ -23,7 +23,7 @@ const BookingsPage = async () => {
                     <div className='grid gap-2' >
                         {
                             bookingsConcluded
-                                .map((booking) => (
+                                .map((booking: any) => (
                                     <ButtonBookings booking={booking} key={booking.id} />
                                 ))
                         }
@@ -34,7 +34,7 @@ const BookingsPage = async () => {
                     <div className='grid gap-2' >
                         {
                             bookingsFinal
-                                .map((booking) => (
+                                .map((booking: any) => (
                                     <ButtonBookings booking={booking} key={booking.id} />
                                 ))
                         }
