@@ -11,15 +11,7 @@ import { ptBR } from "date-fns/locale";
 import Image from "next/image";
 
 interface BookingSinglePage {
-    booking: Prisma.BookingGetPayload<{
-        include: {
-            service: {
-                include: {
-                    barbershop: true
-                }
-            }
-        }
-    }>
+    booking: any
 }
 
 const BookingSingle = ({ booking }: BookingSinglePage) => {
@@ -88,7 +80,7 @@ const BookingSingle = ({ booking }: BookingSinglePage) => {
                 <div className="border-card border-2 rounded-lg p-2" >
                     <div className='flex items-center justify-between' >
                         <h1 className='text-base font-extrabold' >{booking.service.name}</h1>
-                        <h1 className='text-base font-extrabold'>R${booking.service.price.toString()}</h1>
+                        <h1 className='text-base font-extrabold'>R${booking.service.price}</h1>
                     </div>
                     <div className='flex items-center justify-between' >
                         <h1 className='text-sm text-[#838896]'>Data</h1>
