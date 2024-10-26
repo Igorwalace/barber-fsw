@@ -14,7 +14,7 @@ const BookingsPage = async () => {
 
     return (
         <>
-            <main className='my-5' >
+            <main>
                 <div>
                     <h1 className='font-black text-lg lg:text-2xl' >Agendamentos</h1>
                 </div>

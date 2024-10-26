@@ -10,7 +10,7 @@ import { ptBR } from "date-fns/locale";
 
 //db
 
-interface BookingItemProps {
+export interface BookingItemProps {
     booking: Prisma.BookingGetPayload<{
         include: {
             service: {

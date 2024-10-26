@@ -6,6 +6,7 @@ import { poppins } from "./_services/fonts/fonts";
 
 //contexts
 import { AppUtils } from "./_contexts/utils";
+import { AppBookingDetails } from "./_contexts/booking-details-context";
 
 //shadcn
 import { Toaster } from "./_services/components/ui/toaster";
@@ -23,10 +24,12 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className="dark" >
       <body className={poppins.className}>
-        <AppUtils>
-          {children}
-          <Toaster />
-        </AppUtils>
+        <AppBookingDetails>
+          <AppUtils>
+            {children}
+            <Toaster />
+          </AppUtils>
+        </AppBookingDetails>
       </body>
     </html>
   );
