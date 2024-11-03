@@ -16,19 +16,9 @@ interface bookingConfirmedProps {
 const BookingsDetails = ({ bookingConfirmed }: bookingConfirmedProps) => {
 
     const { bookingDetails, setBookingDetails } = useBookingDetails()
-    const [bookingSingleDetails, setBookingSingleDetails] = useState()
-
-    // useEffect(() => {
-    //     if (bookingConfirmed.length === 0) {
-    //         setBookingDetails([])
-    //     }
-    //     else if (bookingDetails.length === 0) {
-    //         setBookingDetails([bookingConfirmed[0]])
-    //     }
-    // }, [bookingDetails, bookingConfirmed])
 
     const fetchData = useCallback(async () => {
-        setBookingDetails([bookingConfirmed[0]]);
+        setBookingDetails([bookingConfirmed.reverse()[0]]);
     }, []);
 
     useEffect(() => {
@@ -40,7 +30,7 @@ const BookingsDetails = ({ bookingConfirmed }: bookingConfirmedProps) => {
     return (
         <>
             {
-                bookingConfirmed.length != 0 && 
+                bookingConfirmed.length != 0 &&
                 <main className={`w-full bg-popover p-5 rounded-xl`} >
                     {
                         bookingDetails?.map((booking: any) => (
