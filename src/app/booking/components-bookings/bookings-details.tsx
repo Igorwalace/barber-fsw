@@ -8,6 +8,8 @@ import { GetConfirmedBookings } from "@/app/_services/_data/get-booking-confirme
 
 //pages
 import BookingSingle from "./booking-single";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { isFuture } from "date-fns";
 
 interface bookingConfirmedProps {
     bookingConfirmed: any
@@ -15,25 +17,27 @@ interface bookingConfirmedProps {
 
 const BookingsDetails = ({ bookingConfirmed }: bookingConfirmedProps) => {
 
-    const { bookingDetails } = useBookingDetails()
+
+    const { bookingDetails, setBookingDetails } = useBookingDetails()
+
+    useEffect(() => {
+        if (bookingDetails.length === 0) setBookingDetails([bookingConfirmed[0]])
+        console.log(bookingDetails)
+    }, [bookingDetails])
+
+    if (bookingDetails[0] === undefined) return
 
     return (
         <>
-            <main className='w-full bg-popover p-5 rounded-xl' >
-                {
-                    bookingDetails.length != 0 ?
+            {
+                <main className={`w-full bg-popover p-5 rounded-xl`} >
+                    {
                         bookingDetails?.map((booking: any) => (
-                            <BookingSingle booking={booking} key={booking.id} />
+                            <BookingSingle booking={booking} setBookingDetails={setBookingDetails} key={booking?.id} />
                         ))
-                        :
-                        bookingConfirmed
-                        ?.slice(0, 1)
-                                .map((booking: any) => (
-                                    <BookingSingle booking={booking} key={booking.id} />
-                                ))
-
-                }
-            </main>
+                    }
+                </main>
+            }
         </>
     );
 }

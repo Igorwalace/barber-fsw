@@ -5,14 +5,13 @@ import { Booking, Prisma } from "@prisma/client";
 
 //next-react
 import { createContext, useContext, useState } from "react"
-import { BookingItemProps } from "../_components-g/booking-item";
-
 
 export const AppContext = createContext<any>(undefined);
 
 export function AppBookingDetails({ children }: {
     children: React.ReactNode;
 }) {
+    
     const [bookingDetails, setBookingDetails] = useState<Booking[] | undefined>([]);
 
     return (

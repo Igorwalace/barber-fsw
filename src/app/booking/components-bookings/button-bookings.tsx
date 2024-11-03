@@ -1,7 +1,7 @@
 'use client'
 //pages
 import BookingItem from "@/app/_components-g/booking-item";
-import { Booking, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 //context
 import useBookingDetails from "@/app/_contexts/booking-details-context";
@@ -21,7 +21,7 @@ interface BookingProps {
 
 const ButtonBookings = ({ booking }: BookingProps) => {
 
-    const { setBookingDetails } = useBookingDetails()
+    const { setBookingDetails, bookingDetails } = useBookingDetails()
 
     const handleBookingDetails = () => {
         setBookingDetails([booking])

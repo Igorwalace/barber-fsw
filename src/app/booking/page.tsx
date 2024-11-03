@@ -1,15 +1,15 @@
 //react-next
 import { redirect } from "next/navigation";
-import Footer from "../_pages/_footer";
-import Header from "../_pages/_header";
 
 //db
 import { GetSession } from "../_services/_data/get-session";
+import { GetConfirmedBookings } from "../_services/_data/get-booking-confirmed";
 
 //pages
+import Footer from "../_pages/_footer";
 import BookingsPage from "./components-bookings/bookings-confirmed";
+import Header from "../_pages/_header";
 import BookingsDetails from "./components-bookings/bookings-details";
-import { GetConfirmedBookings } from "../_services/_data/get-booking-confirmed";
 
 const Bookings = async () => {
 
