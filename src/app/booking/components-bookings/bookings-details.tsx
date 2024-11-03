@@ -18,14 +18,14 @@ const BookingsDetails = ({ bookingConfirmed }: bookingConfirmedProps) => {
     const { bookingDetails, setBookingDetails } = useBookingDetails()
 
     const fetchData = useCallback(async () => {
-        setBookingDetails([bookingConfirmed.reverse()[0]]);
+        await setBookingDetails([bookingConfirmed[0]]);
     }, []);
 
     useEffect(() => {
         if (bookingConfirmed.length > 0 && bookingDetails.length === 0) {
             fetchData();
         }
-    }, [bookingConfirmed, bookingConfirmed]);
+    }, [bookingDetails, bookingConfirmed]);
 
     return (
         <>
