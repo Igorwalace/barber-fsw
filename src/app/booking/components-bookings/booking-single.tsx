@@ -127,8 +127,8 @@ const BookingSingle = ({ booking, setBookingDetails }: BookingSinglePage) => {
                 <Separator className='h-[2px]' />
 
                 <div className="space-y-3 py-2">
-                    {booking.service.barbershop.phones.map((phone: any) => (
-                        <Phone_Item key={phone} phone={phone} />
+                    {booking.service.barbershop.phones.map((phone: any, key: any) => (
+                        <Phone_Item key={key} phone={phone} />
                     ))}
                 </div>
 
