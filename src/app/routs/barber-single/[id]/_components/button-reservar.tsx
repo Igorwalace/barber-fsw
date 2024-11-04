@@ -5,6 +5,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 //pages
 
 //local
+import { format, isPast, isToday, set } from 'date-fns';
 import { ptBR } from "date-fns/locale";
 
 //shadcn
@@ -17,12 +18,11 @@ import {
     SheetTitle,
 } from "@/app/_services/components/ui/sheet"
 import { useToast } from '@/app/_services/components/ui/use-toast';
+import { Calendar } from '@/app/_services/components/ui/calendar'
+import { Separator } from '@/app/_services/components/ui/separator'
 
 //prisma
 import { Barbershop, BarbershopService, Booking } from '@prisma/client'
-import { Separator } from '@/app/_services/components/ui/separator'
-import { Calendar } from '@/app/_services/components/ui/calendar'
-import { format, isPast, isToday, set } from 'date-fns';
 
 //db/funcao createbooking
 import { CreateBooking } from '@/app/_services/_db-create-booking/_create-booking';
@@ -30,12 +30,10 @@ import { CreateBooking } from '@/app/_services/_db-create-booking/_create-bookin
 //react-icons
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { GETBookings } from './get-bookings';
-import { useRouter } from 'next/navigation';
 import { Checkbookings } from './check-bookings';
 
 //contexts
 import useAppUtils from '@/app/_contexts/utils';
-import DialogConfirmedBooking from './_dialog-confirmed-booking';
 
 interface BarberServiceProps {
     barberservice: BarbershopService
@@ -73,6 +71,27 @@ const TIME_LIST = [
     "20:30",
     "21:00",
 ]
+const TIME_LIST_SATURDAY = [
+    "08:00",
+    "08:30",
+    "09:00",
+    "09:30",
+    "10:00",
+    "10:30",
+    "11:00",
+    "11:30",
+    "12:00",
+    "12:30",
+    "13:00",
+    "13:30",
+    "14:00",
+    "14:30",
+    "15:00",
+    "15:30",
+    "16:00",
+    "16:30",
+    "17:00"
+]
 
 interface GetTimeListProps {
     bookings: Booking[]
@@ -100,12 +119,34 @@ const getTimeList = ({ bookings, selectedDay }: GetTimeListProps) => {
         return true
     })
 }
+const getTimeListSaturday = ({ bookings, selectedDay }: GetTimeListProps) => {
+    return TIME_LIST_SATURDAY.filter((time) => {
+        const hour = Number(time.split(":")[0])
+        const minutes = Number(time.split(":")[1])
+
+        const timeIsOnThePast = isPast(set(new Date(), { hours: hour, minutes }))
+        if (timeIsOnThePast && isToday(selectedDay)) {
+            return false
+        }
+
+        const hasBookingOnCurrentTime = bookings.some(
+            (booking) =>
+                booking.date.getHours() === hour &&
+                booking.date.getMinutes() === minutes,
+        )
+        if (hasBookingOnCurrentTime) {
+            return false
+        }
+        return true
+    })
+}
 
 const Button_Reservar = ({ barberservice, barbershop, session, bookings }: BarberServiceProps) => {
 
     const [openReserve, setOpenReserve] = useState(false)
     const [loadingBooking, setLoadingBooking] = useState(false)
     const [day, setday] = useState<Date | undefined>(undefined)
+    const [daySelected, setDaySelected] = useState<Date | undefined>()
     const [selectedTime, setselectedTime] = useState('')
     const { toast } = useToast()
 
@@ -127,7 +168,13 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
 
     const timeList = useMemo(() => {
         if (!day) return []
-        return getTimeList({
+        if (daySelected?.getDay() != 6) {
+            return getTimeList({
+                bookings: dayBookings,
+                selectedDay: day,
+            })
+        }
+        return getTimeListSaturday({
             bookings: dayBookings,
             selectedDay: day,
         })
@@ -151,7 +198,8 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
     }
 
     const handleSelectDay = (dateSelect: Date | undefined) => {
-        if(dateSelect?.getDay() === 0 || dateSelect?.getDay() === 1) return
+        setDaySelected(dateSelect)
+        if (dateSelect?.getDay() === 0 || dateSelect?.getDay() === 1) return
         setselectedTime('')
         setday(dateSelect)
     }
