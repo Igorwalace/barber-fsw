@@ -1,16 +1,28 @@
 'use client'
 
-import useBookingDetails from "@/app/_contexts/booking-details-context";
+//db
 import { DeleteBooking } from "@/app/_pages/_delete-booking";
+
+//shadcn
 import { Button } from "@/app/_services/components/ui/button";
 import { Separator } from "@/app/_services/components/ui/separator";
+
+//pages
 import Phone_Item from "@/app/routs/barber-single/[id]/_components/phone-item";
-import { Prisma } from "@prisma/client";
+
+//date-fns
 import { format, isFuture } from "date-fns";
 import { ptBR } from "date-fns/locale";
+
+//next-react
 import Image from "next/image";
 import { useState } from "react";
+
+//react-icons
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
+//context
+import useAppUtils from "@/app/_contexts/utils";
 
 interface BookingSinglePage {
     booking: any
@@ -19,6 +31,8 @@ interface BookingSinglePage {
 
 const BookingSingle = ({ booking, setBookingDetails }: BookingSinglePage) => {
 
+    const { setSheetBookingDetails } = useAppUtils()
+
     const [loading, setLoading] = useState(false)
     if (!booking) return
 
@@ -26,6 +40,7 @@ const BookingSingle = ({ booking, setBookingDetails }: BookingSinglePage) => {
         try {
             setLoading(true)
             await DeleteBooking({ bookingId: bookingId })
+            setSheetBookingDetails(false)
             setBookingDetails([])
             setLoading(false)
         } catch (error) {

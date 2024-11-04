@@ -8,6 +8,7 @@ import useBookingDetails from "@/app/_contexts/booking-details-context";
 //pages
 import BookingSingle from "./booking-single";
 import { useCallback, useEffect } from "react";
+import SheetBookingDetails from "./sheet-bookings-details";
 
 interface bookingConfirmedProps {
     bookingConfirmed: any
@@ -32,6 +33,7 @@ const BookingsDetails = ({ bookingConfirmed }: bookingConfirmedProps) => {
             {
                 bookingDetails.length > 0 &&
                 <main className={`w-full bg-popover p-5 rounded-xl`} >
+                    <SheetBookingDetails />
                     {
                         bookingDetails?.map((booking: any) => (
                             <BookingSingle booking={booking} setBookingDetails={setBookingDetails} key={booking?.id} />

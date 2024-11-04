@@ -15,6 +15,7 @@ export function AppUtils({ children }: {
     const [openDialogLogin, setOpenDialogLogin] = useState(false)
     const [dialogLoginFinally, setDialogLoginFinally] = useState(false)
     const [openDialogConfirmedBooking, setOpenDialogConfirmedBooking] = useState(false)
+    const [sheetBookingDetails, setSheetBookingDetails] = useState(false)
 
     return (
         <AppContext.Provider value={{
@@ -27,7 +28,9 @@ export function AppUtils({ children }: {
             dialogLoginFinally,
             setDialogLoginFinally,
             openDialogConfirmedBooking,
-            setOpenDialogConfirmedBooking
+            setOpenDialogConfirmedBooking,
+            sheetBookingDetails,
+            setSheetBookingDetails
         }} >
             {children}
         </AppContext.Provider>
