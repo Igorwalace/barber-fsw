@@ -70,7 +70,7 @@ const BookingSingle = ({ booking, setBookingDetails }: BookingSinglePage) => {
                                 src={booking.service.barbershop.imageUrl}
                             />
                         </div>
-                        <div>
+                        <div className="text-white" >
                             <h1 className='text-base' >{booking.service.barbershop.name}</h1>
                             <h1 className='text-xs' >{booking.service.barbershop.address}</h1>
                         </div>
@@ -87,11 +87,11 @@ const BookingSingle = ({ booking, setBookingDetails }: BookingSinglePage) => {
 
                 <div className="border-[#26272B] border-2 rounded-lg p-2" >
                     <div className='flex items-center justify-between' >
-                        <h1 className='text-base font-extrabold' >{booking.service.name}</h1>
-                        <h1 className='text-base font-extrabold'>R${booking.service.price}</h1>
+                        <h1 className='text-base font-extrabold text-white' >{booking.service.name}</h1>
+                        <h1 className='text-base font-extrabold text-white'>R${booking.service.price}</h1>
                     </div>
                     <div className='flex items-center justify-between' >
-                        <h1 className='text-sm text-[#838896]'>Data</h1>
+                        <h1 className='text-sm text-[]'>Data</h1>
                         <h1 className='text-sm'>
                             {format(booking.date, "d", {
                                 locale: ptBR
@@ -134,7 +134,7 @@ const BookingSingle = ({ booking, setBookingDetails }: BookingSinglePage) => {
                 {/* <Separator className={`w-full ${!isFuture(booking.date) && 'hidden'} h-[2px]`} /> */}
 
                 <div className='py-2 flex flex-col gap-3' >
-                    <h1 className='text-sm' >Sobre nós</h1>
+                    <h1 className='text-sm text-white' >Sobre nós</h1>
                     <p className='text-sm text-[#838896]' >{booking.service.barbershop.description}</p>
                 </div>
 

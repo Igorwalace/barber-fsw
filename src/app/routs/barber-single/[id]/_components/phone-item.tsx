@@ -29,7 +29,7 @@ const Phone_Item = ({ phone }: PhoneProps) => {
 
             <div className="flex items-center gap-2">
                 <SmartphoneIcon />
-                <p className="text-sm">{phone}</p>
+                <p className="text-sm text-white">{phone}</p>
             </div>
 
             <Button

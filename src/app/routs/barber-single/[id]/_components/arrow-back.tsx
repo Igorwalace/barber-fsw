@@ -1,5 +1,6 @@
 'use client'
 
+//next-react
 import React from 'react'
 import { useRouter } from 'next/navigation'
 
@@ -14,7 +15,7 @@ const Arrow_Back = () => {
     const router = useRouter()
 
     const handleButtonBack = () => {
-        router.push('/')
+        router.back()
     }
 
     return (
