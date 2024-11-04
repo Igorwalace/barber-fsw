@@ -11,7 +11,7 @@ const SerachHeader = () => {
 
     return (
         <>
-            <div className={`${pathname === '/' && 'lg:hidden'} lg:block hidden w-2/5`} >
+            <div className={`${pathname === '/' || pathname === '/booking' && 'lg:hidden'} lg:block hidden w-2/5`} >
                 <FormSearch />
             </div>
         </>

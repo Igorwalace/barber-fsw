@@ -22,10 +22,10 @@ const Bookings = async () => {
             <main className='min-h-[calc(100dvh-68px)]' >
                 <Header />
                 <div className='flex justify-center items-start gap-10 m-5' >
-                    <div className='w-full lg:w-[445px]' >
+                    <div className='w-full lg:w-[600px]' >
                         <BookingsPage />
                     </div>
-                    <div className='hidden lg:block w-[445px] mt-[68px]' >
+                    <div className='hidden w-[445px] mt-[68px]' >
                         <BookingsDetails bookingConfirmed={bookingConfirmed} />
                     </div>
                 </div>

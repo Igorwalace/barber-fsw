@@ -31,7 +31,7 @@ const ButtonBookings = ({ booking }: BookingProps) => {
 
     const handleBookingDetails = () => {
         setBookingDetails([booking])
-        if (!isLargeDevice) return
+        // if (!isLargeDevice) return
         setSheetBookingDetails(true)
     }
 

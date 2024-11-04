@@ -30,10 +30,10 @@ const BookingsDetails = ({ bookingConfirmed }: bookingConfirmedProps) => {
 
     return (
         <>
+            <SheetBookingDetails />
             {
                 bookingDetails.length > 0 &&
                 <main className={`w-full bg-popover p-5 rounded-xl`} >
-                    <SheetBookingDetails />
                     {
                         bookingDetails?.map((booking: any) => (
                             <BookingSingle booking={booking} setBookingDetails={setBookingDetails} key={booking?.id} />
@@ -41,6 +41,9 @@ const BookingsDetails = ({ bookingConfirmed }: bookingConfirmedProps) => {
                     }
                 </main>
             }
+            <button onClick={()=>{
+                console.log(bookingDetails)
+            }} >CLIQUEEEEE</button>
         </>
     );
 }

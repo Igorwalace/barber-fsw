@@ -9,7 +9,6 @@ const SheetBookingDetails = () => {
     const { sheetBookingDetails, setSheetBookingDetails } = useAppUtils()
     const { bookingDetails, setBookingDetails } = useBookingDetails()
 
-
     return (
         <>
             <div className='lg:hidden'>

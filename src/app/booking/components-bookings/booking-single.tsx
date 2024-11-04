@@ -44,8 +44,7 @@ const BookingSingle = ({ booking, setBookingDetails }: BookingSinglePage) => {
             setBookingDetails([])
             setLoading(false)
         } catch (error) {
-            alert(bookingId)
-            console.log(error)
+            alert('Error inesperado ocorreu.')
         }
     }
 
