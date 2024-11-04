@@ -66,6 +66,12 @@ const TIME_LIST = [
     "17:00",
     "17:30",
     "18:00",
+    "18:30",
+    "19:00",
+    "19:30",
+    "20:00",
+    "20:30",
+    "21:00",
 ]
 
 interface GetTimeListProps {
@@ -145,7 +151,7 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
     }
 
     const handleSelectDay = (dateSelect: Date | undefined) => {
-        if(dateSelect?.getDay() === 0) return
+        if(dateSelect?.getDay() === 0 || dateSelect?.getDay() === 1) return
         setselectedTime('')
         setday(dateSelect)
     }
