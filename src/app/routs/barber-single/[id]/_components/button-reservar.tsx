@@ -102,12 +102,10 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
     const [day, setday] = useState<Date | undefined>(undefined)
     const [selectedTime, setselectedTime] = useState('')
     const { toast } = useToast()
-    const router = useRouter()
 
     const [dayBookings, setDayBookings] = useState<Booking[]>([])
-    const [bookingSheetIsOpen, setBookingSheetIsOpen] = useState(false)
 
-    const { openDialogConfirmedBooking, setOpenDialogConfirmedBooking } = useAppUtils()
+    const { setOpenDialogConfirmedBooking } = useAppUtils()
 
     useEffect(() => {
         const fetch = async () => {
@@ -147,6 +145,7 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
     }
 
     const handleSelectDay = (dateSelect: Date | undefined) => {
+        if(dateSelect?.getDay() === 0) return
         setselectedTime('')
         setday(dateSelect)
     }
@@ -183,11 +182,6 @@ const Button_Reservar = ({ barberservice, barbershop, session, bookings }: Barbe
             barbershopId: barberservice.barbershopId
         })
         setLoadingBooking(false)
-        // toast({
-        //     style: { backgroundColor: 'white', color: 'black', border: 'none' },
-        //     title: "Concluído",
-        //     description: "Reserva concluída com sucesso!",
-        // })
         setOpenDialogConfirmedBooking(true)
         setselectedTime('')
         setday(undefined)
