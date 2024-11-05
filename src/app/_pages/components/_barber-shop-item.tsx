@@ -27,8 +27,8 @@ const BarbershopItem = ({ barbershop }: BarbershopItemProps) => {
                     />
                 </div>
                 <div className="p-3 flex flex-col gap-[8px]">
-                    <h1 className='text-sm font-bold whitespace-nowrap' >{barbershop.name}</h1>
-                    <h1 className='text-xs text-[#838896] whitespace-nowrap' >{barbershop.address}</h1>
+                    <h1 className='text-sm font-bold whitespace-nowrap overflow-hidden' >{barbershop.name}</h1>
+                    <h1 className='text-xs text-[#838896] whitespace-nowrap overflow-hidden' >{barbershop.address}</h1>
                     <Button asChild variant='secondary'>
                         <Link href={`/routs/barber-single/${barbershop.id}`} >Reservar</Link>
                     </Button>
